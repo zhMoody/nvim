@@ -38,6 +38,7 @@ return {
           open_cmd = "30vnew",
           auto_open = false,
         },
+        fvm = true,
       }
     end
   end,
