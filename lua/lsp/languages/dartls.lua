@@ -34,6 +34,7 @@ return {
             device = true,
           },
         },
+        fvm = true,
         outline = {
           open_cmd = "30vnew",
           auto_open = false,

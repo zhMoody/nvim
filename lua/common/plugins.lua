@@ -1,6 +1,6 @@
 require("lazy").setup {
   "folke/which-key.nvim",
-  "jose-elias-alvarez/nvim-lsp-ts-utils",
+  -- "jose-elias-alvarez/nvim-lsp-ts-utils",
   "ahmedkhalf/project.nvim",
   "mfussenegger/nvim-dap",
   "theHamsta/nvim-dap-virtual-text",
@@ -12,17 +12,17 @@ require("lazy").setup {
   { "williamboman/mason-lspconfig.nvim", lazy = true },
   "folke/neodev.nvim",
   "neovim/nvim-lspconfig",
-  { "jose-elias-alvarez/null-ls.nvim", event = "BufReadPre" },
+  "nkrkv/nvim-treesitter-rescript",
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "nkrkv/nvim-treesitter-rescript",
-    },
     build = ":TSUpdate",
   },
   {
     "kyazdani42/nvim-tree.lua",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    dependencies = {
+      "kyazdani42/nvim-web-devicons",
+      "stevearc/dressing.nvim",
+    },
   },
   {
     "akinsho/bufferline.nvim",
@@ -38,7 +38,7 @@ require("lazy").setup {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
-      "rafamadriz/friendly-snippets",
+      -- "rafamadriz/friendly-snippets",
       "onsails/lspkind-nvim",
     },
   },
@@ -50,11 +50,14 @@ require("lazy").setup {
   "numToStr/Comment.nvim",
   "windwp/nvim-autopairs",
   "tpope/vim-surround",
-  "lukas-reineke/indent-blankline.nvim",
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   "lewis6991/gitsigns.nvim",
   "NvChad/nvim-colorizer.lua",
   "matze/vim-move",
-  -- 'mhartington/formatter.nvim'
+  {
+    "stevearc/conform.nvim",
+    opts = {},
+  },
   {
     "glepnir/dashboard-nvim",
     dependencies = {
@@ -63,16 +66,13 @@ require("lazy").setup {
     },
   },
   {
-    "akinsho/flutter-tools.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
-    },
-  },
-  {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
+  },
+  {
+    "j-hui/fidget.nvim",
+    event = "LspAttach",
+    opts = {},
   },
   {
     "nvimdev/hlsearch.nvim",
@@ -80,6 +80,14 @@ require("lazy").setup {
     config = function()
       require("hlsearch").setup()
     end,
+  },
+  {
+    "akinsho/flutter-tools.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim",
+    },
   },
   -- theme start
   { "catppuccin/nvim", name = "catppuccin" },

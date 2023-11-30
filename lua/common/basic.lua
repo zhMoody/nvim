@@ -58,3 +58,6 @@ vim.opt.directory = { prefix .. "/nvim/.swp//" }
 vim.o.clipboard = "unnamed,unnamedplus"
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
+
+vim.g.loaded_netrw = 0
+vim.g.loaded_netrwPlugin = 0
