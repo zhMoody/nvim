@@ -17,4 +17,4 @@ vim.opt.guifont = {
   ":h" .. tostring(json.font_size or 16),
 }
 
-vim.g.python3_host_prog = json.python3_host_prog or "/opt/local/bin/python3"
+vim.g.python3_host_prog = json.python3_host_prog or "/usr/bin/python3"

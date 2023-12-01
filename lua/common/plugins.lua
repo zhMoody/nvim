@@ -12,7 +12,7 @@ require("lazy").setup {
   { "williamboman/mason-lspconfig.nvim", lazy = true },
   "folke/neodev.nvim",
   "neovim/nvim-lspconfig",
-  "nkrkv/nvim-treesitter-rescript",
+  -- "nkrkv/nvim-treesitter-rescript",
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",

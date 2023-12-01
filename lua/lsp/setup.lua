@@ -11,9 +11,6 @@ local servers = {
   ocamllsp = require "lsp.languages.ocaml",
   hls = require "lsp.languages.haskell",
   dartls = require "lsp.languages.dartls",
-  rescriptls = require "lsp.languages.rescript",
-  volar = require "lsp.languages.vue",
-  sourcekit = require "lsp.languages.swift",
 }
 
 for key, config in pairs(servers) do
