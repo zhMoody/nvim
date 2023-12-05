@@ -6,7 +6,7 @@
 local colors = {
   blue     = '#80a0ff',
   cyan     = '#79dac8',
-  black    = '#080808',
+  black    = '#292929',
   white    = '#c6c6c6',
   red      = '#ff5189',
   violet   = '#d183e8',
@@ -60,7 +60,7 @@ local config = {
     theme = bubbles_theme,
     -- component_separators = "|",
     component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
   },
   sections = {
     lualine_a = {
