@@ -91,6 +91,7 @@ require("lazy").setup {
   },
   -- theme start
   { "catppuccin/nvim", name = "catppuccin" },
+  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
   { "limitLiu/everforest-nvim", lazy = false, priority = 1000 },
   "limitLiu/zephyr-nvim",
   "RRethy/vim-illuminate",
