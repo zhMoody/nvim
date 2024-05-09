@@ -11,7 +11,14 @@ require("lazy").setup {
       "nvim-neotest/nvim-nio",
     },
   },
-
+  {
+    "akinsho/flutter-tools.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim",
+    },
+  },
   "puremourning/vimspector",
   { "p00f/clangd_extensions.nvim", lazy = true },
   "b0o/SchemaStore.nvim",
@@ -92,8 +99,8 @@ require("lazy").setup {
   { "glepnir/oceanic-material", priority = 1000 },
   { "glepnir/nerdicons.nvim", cmd = "NerdIcons" },
   -- theme start
-  { "catppuccin/nvim", name = "catppuccin" },
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
+  { "catppuccin/nvim", name = "catppuccin" },
   { "limitLiu/everforest-nvim", lazy = false, priority = 1000 },
   "limitLiu/zephyr-nvim",
   "RRethy/vim-illuminate",

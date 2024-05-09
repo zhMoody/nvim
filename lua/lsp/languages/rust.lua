@@ -13,11 +13,11 @@ local opts = {
   capabilities = common.capabilities,
   flags = common.flags,
   handlers = common.handlers,
-  on_attach = function(client, buf)
+  on_attach = function(client, bufnr)
     common.disableFormat(client)
-    common.keybinding(buf)
-    vim.lsp.inlay_hint.enable(buf, true)
-    keybinding(buf)
+    common.keybinding(bufnr)
+    vim.lsp.inlay_hint.enable(true, { bufnr })
+    keybinding(bufnr)
   end,
   settings = {
     ["rust-analyzer"] = {

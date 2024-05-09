@@ -16,6 +16,13 @@ M.capabilities = require("cmp_nvim_lsp").default_capabilities {
   snippetSupport = false,
 }
 
+M.flutterKeybinding = function(buf, keybindings)
+  local function buf_set_map(...)
+    vim.api.nvim_buf_set_keymap(buf, ...)
+  end
+  keybindings.map_flutter_tools(buf_set_map)
+end
+
 M.flags = {
   debounce_text_changes = 150,
 }
