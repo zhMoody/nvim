@@ -2,9 +2,16 @@ require("lazy").setup {
   "folke/which-key.nvim",
   -- "jose-elias-alvarez/nvim-lsp-ts-utils",
   "ahmedkhalf/project.nvim",
-  "mfussenegger/nvim-dap",
   "theHamsta/nvim-dap-virtual-text",
-  "rcarriga/nvim-dap-ui",
+
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+    },
+  },
+
   "puremourning/vimspector",
   { "p00f/clangd_extensions.nvim", lazy = true },
   "b0o/SchemaStore.nvim",
@@ -12,18 +19,12 @@ require("lazy").setup {
   { "williamboman/mason-lspconfig.nvim", lazy = true },
   "folke/neodev.nvim",
   "neovim/nvim-lspconfig",
-  -- "nkrkv/nvim-treesitter-rescript",
+  "limitLiu/nvim-treesitter-rescript",
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
   },
-  {
-    "kyazdani42/nvim-tree.lua",
-    dependencies = {
-      "kyazdani42/nvim-web-devicons",
-      "stevearc/dressing.nvim",
-    },
-  },
+  "kyazdani42/nvim-tree.lua",
   {
     "akinsho/bufferline.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
@@ -39,10 +40,15 @@ require("lazy").setup {
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
       -- "rafamadriz/friendly-snippets",
-      "onsails/lspkind-nvim",
     },
   },
-  { "simrat39/rust-tools.nvim", event = "BufReadPre" },
+  "onsails/lspkind-nvim",
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^4",
+    ft = { "rust" },
+    event = "BufReadPre",
+  },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
@@ -81,14 +87,10 @@ require("lazy").setup {
       require("hlsearch").setup()
     end,
   },
-  {
-    "akinsho/flutter-tools.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
-    },
-  },
+  "stevearc/dressing.nvim",
+  "folke/trouble.nvim",
+  { "glepnir/oceanic-material", priority = 1000 },
+  { "glepnir/nerdicons.nvim", cmd = "NerdIcons" },
   -- theme start
   { "catppuccin/nvim", name = "catppuccin" },
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },

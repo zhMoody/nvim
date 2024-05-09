@@ -39,7 +39,7 @@ vim.o.updatetime = 300
 vim.o.timeoutlen = 300
 vim.o.splitbelow = true
 vim.o.splitright = true
-vim.g.completeopt = "menu,menuone,noselect,noinsert"
+vim.opt.completeopt = "menu,menuone,noselect"
 vim.o.termguicolors = true
 vim.o.list = true
 -- vim.o.listchars = 'space:.'
@@ -60,3 +60,6 @@ vim.g.loaded_perl_provider = 0
 
 vim.g.loaded_netrw = 0
 vim.g.loaded_netrwPlugin = 0
+
+vim.g.neovide_input_macos_alt_is_meta = true
+vim.g.neovide_cursor_vfx_mode = "wireframe"

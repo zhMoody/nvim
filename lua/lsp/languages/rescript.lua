@@ -1,5 +1,4 @@
 local common = require "lsp.languages.common"
-
 local opts = {
   capabilities = common.capabilities,
   flags = common.flags,
@@ -12,13 +11,12 @@ local opts = {
     extensionConfiguration = {
       askToStartBuild = false,
       signatureHelp = { enabled = true },
-      inlayHints = { enable = false },
+      inlayHints = { enable = true },
       autoRunCodeAnalysis = true,
-      codeLens = false,
+      codeLens = true,
     },
   },
 }
-
 return {
   on_setup = function(server)
     server.setup(opts)

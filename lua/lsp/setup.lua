@@ -12,6 +12,8 @@ local servers = {
   hls = require "lsp.languages.haskell",
   dartls = require "lsp.languages.dartls",
   rescriptls = require "lsp.languages.rescript",
+  sourcekit = require "lsp.languages.swift",
+  rescriptls = require "lsp.languages.rescript",
 }
 
 for key, config in pairs(servers) do

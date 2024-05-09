@@ -34,6 +34,19 @@ map("n", "<C-l>", "<C-w>l", opt)
 map("n", "<C-j>", "<C-w>j", opt)
 map("n", "<C-h>", "<C-w>h", opt)
 
+vim.keymap.set("n", "<localleader>c", function()
+  if vim.o.background == "light" then
+    vim.o.background = "dark"
+  else
+    vim.o.background = "light"
+  end
+end, { expr = true, noremap = true, replace_keycodes = false })
+
+if vim.g.neovide then
+  vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
+  map("!", "<D-v>", "<C-R>+", opt)
+end
+
 local M = {}
 
 M.telescope_keys = {
@@ -70,10 +83,6 @@ M.map_lsp = function(buf)
   buf("n", "<leader>lc", "<cmd>Lspsaga code_action<CR>", opt)
 end
 
-M.map_flutter_tools = function(buf)
-  buf("n", "<leader>ac", "<cmd>Telescope flutter commands<CR>", opt)
-end
-
 M.cmp = function(c)
   return {
     ["<A-.>"] = c.mapping(c.mapping.complete(), { "i", "c" }),
@@ -105,7 +114,7 @@ M.comment = {
 }
 
 M.map_dap = function()
-  map("n", "<leader>ds", "<cmd>RustDebuggables<CR>", opt)
+  map("n", "<leader>ds", "<cmd>RustLsp debuggables<CR>", opt)
   map(
     "n",
     "<leader>dq",
