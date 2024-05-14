@@ -1,4 +1,4 @@
-local nvim_tree = requirePlugin "nvim-tree"
+local ok, nvim_tree = pcall(require, "nvim-tree")
 
 local function on_attach(bufnr)
   local api = require "nvim-tree.api"
@@ -144,7 +144,7 @@ local function on_attach(bufnr)
   )
 end
 
-if nvim_tree then
+if ok then
   nvim_tree.setup {
     git = {
       enable = true,

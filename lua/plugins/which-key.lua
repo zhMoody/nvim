@@ -86,7 +86,8 @@ local format = {
 
 local localMapping = {
   -- p = { ":BufferLineCyclePrev<CR>", "Previous Buffer" },
-  -- n = { ":BufferLineCycleNext<CR>", "Next Buffer" },
+  c = { "Change Background" },
+  n = { "<cmd>NerdIcons<CR>", "Open Nerd Icons" },
   k = { "<cmd>bd<CR>", "Delete Buffer" },
   o = { "<cmd>Telescope find_files<CR>", "Open File" },
   d = {
@@ -99,6 +100,34 @@ local localMapping = {
   },
   e = { "<cmd>Telescope buffers<CR>", "Show Buffers" },
   ["="] = format,
+  l = {
+    name = "Lsp",
+    r = { "<cmd>LspRestart<CR>", "Lsp Restart" },
+  },
+  t = {
+    name = "Quickfix List",
+    x = { "<cmd>TroubleToggle<CR>", "Open Quickfix" },
+    w = {
+      "<cmd>TroubleToggle workspace_diagnostics<CR>",
+      "Open Workspace Quickfix",
+    },
+    d = {
+      "<cmd>TroubleToggle document_diagnostics<CR>",
+      "Open Document Quickfix",
+    },
+    q = {
+      "<cmd>TroubleToggle quickfix<CR>",
+      "Do Quickfix",
+    },
+    l = {
+      "<cmd>TroubleToggle quickfix<CR>",
+      "Open Local Quickfix",
+    },
+    r = {
+      "<cmd>TroubleToggle lsp_references<CR>",
+      "Show Lsp References",
+    },
+  },
 }
 
 wk.register(mapping, { prefix = "<leader>" })

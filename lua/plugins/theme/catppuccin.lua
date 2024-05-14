@@ -1,12 +1,12 @@
-local catppuccin = requirePlugin "catppuccin"
-if catppuccin then
+local ok, catppuccin = pcall(require, "catppuccin")
+if ok then
   catppuccin.setup {
-    flavour = "Mocha", -- latte, frappe, macchiato, mocha
+    flavour = "frappe", -- latte, frappe, macchiato, mocha
     background = { -- :h background
       light = "latte",
-      dark = "Mocha",
+      dark = "macchiato",
     },
-    transparent_background = true,
+    transparent_background = false,
     show_end_of_buffer = false, -- show the '~' characters after the end of buffers
     term_colors = true,
     dim_inactive = {

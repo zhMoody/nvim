@@ -5,20 +5,13 @@ local lsp_config = require "lspconfig"
 
 local servers = {
   lua_ls = require "lsp.languages.lua",
-  rust_analyzer = require "lsp.languages.rust",
+  -- rust_analyzer = require "lsp.languages.rust",
   clangd = require "lsp.languages.clangd",
-  jdtls = require "lsp.languages.java",
-  gopls = require "lsp.languages.go",
-  html = require "lsp.languages.html",
-  cssls = require "lsp.languages.css",
   jsonls = require "lsp.languages.json",
-  tsserver = require "lsp.languages.ts",
-  phpactor = require "lsp.languages.php",
-  kotlin_language_server = require "lsp.languages.kotlin",
   ocamllsp = require "lsp.languages.ocaml",
-  rescriptls = require "lsp.languages.rescript",
-  volar = require "lsp.languages.vue",
+  hls = require "lsp.languages.haskell",
   sourcekit = require "lsp.languages.swift",
+  rescriptls = require "lsp.languages.rescript",
   dartls = require "lsp.languages.flutter",
 }
 

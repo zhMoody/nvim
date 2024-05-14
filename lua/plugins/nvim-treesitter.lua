@@ -1,5 +1,9 @@
 require("nvim-treesitter.configs").setup {
   ensure_installed = { "vim" },
+  modules = {},
+  sync_install = false,
+  auto_install = true,
+  ignore_install = {},
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
@@ -14,9 +18,10 @@ require("nvim-treesitter.configs").setup {
     },
   },
   indent = {
-    enable = false,
+    enable = true,
   },
 }
+
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 vim.wo.foldlevel = 99

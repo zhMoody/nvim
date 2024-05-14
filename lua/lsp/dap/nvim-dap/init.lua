@@ -1,8 +1,9 @@
-local dap = requirePlugin "dap"
-local dap_ui = requirePlugin "dapui"
-local dap_virtual_text = requirePlugin "nvim-dap-virtual-text"
+local ok, dap = pcall(require, "dap")
+local dapUIOk, dap_ui = pcall(require, "dapui")
+local dapVirtualTextOk, dap_virtual_text =
+  pcall(require, "nvim-dap-virtual-text")
 
-if dap_virtual_text then
+if dapVirtualTextOk then
   dap_virtual_text.setup { commented = true }
 end
 
@@ -14,22 +15,22 @@ vim.fn.sign_define("DapBreakpoint", {
 })
 
 vim.fn.sign_define("DapStopped", {
-  text = "",
+  text = "󰁕",
   texthl = "LspDiagnosticsSignInformation",
   linehl = "DiagnosticUnderlineInfo",
   numhl = "LspDiagnosticsSignInformation",
 })
 
 vim.fn.sign_define("DapBreakpointRejected", {
-  text = "",
+  text = "󰃤",
   texthl = "LspDiagnosticsSignHint",
   linehl = "",
   numhl = "",
 })
 
-if dap_ui and dap then
+if dapUIOk and ok then
   dap_ui.setup {
-    icons = { expanded = "▾", collapsed = "▸" },
+    icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
     mappings = {
       -- Use a table to apply multiple mappings
       expand = { "o", "<CR>" },
@@ -70,17 +71,16 @@ if dap_ui and dap then
     windows = { indent = 1 },
     render = {
       max_type_length = nil, -- Can be integer or nil.
+      indent = 1,
     },
   }
-  dap.listeners.after.event_initialized["dapui_config"] = function()
-    dap_ui.open()
-  end
-  dap.listeners.before.event_terminated["dapui_config"] = function()
-    dap_ui.close()
-  end
-  dap.listeners.before.event_exited["dapui_config"] = function()
-    dap_ui.close()
-  end
+  dap.listeners.before.attach.dapui_config = dap_ui.open
+  dap.listeners.before.launch.dapui_config = dap_ui.open
+  dap.listeners.before.event_terminated.dapui_config = dap_ui.close
+  dap.listeners.before.event_exited.dapui_config = dap_ui.close
 
-  require("common.keybindings").map_dap()
+  local isOk, bindings = pcall(require, "common.keybindings")
+  if isOk then
+    bindings.map_dap()
+  end
 end

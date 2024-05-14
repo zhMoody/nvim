@@ -6,36 +6,45 @@ local keybinding = function(b)
   end
 
   local opt = { noremap = true, silent = true }
-  buf(
-    "n",
-    "K",
-    "<cmd>lua require'rust-tools'.hover_actions.hover_actions()<CR>",
-    opt
-  )
+  buf("n", "K", "<cmd>RustLsp hover actions<CR>", opt)
 end
 
 local opts = {
   capabilities = common.capabilities,
   flags = common.flags,
   handlers = common.handlers,
-  on_attach = function(client, buf)
+  on_attach = function(client, bufnr)
     common.disableFormat(client)
-    common.keybinding(buf)
-    keybinding(buf)
+    common.keybinding(bufnr)
+    vim.lsp.inlay_hint.enable(true, { bufnr })
+    keybinding(bufnr)
   end,
   settings = {
     ["rust-analyzer"] = {
       procMacro = {
         enable = true,
       },
-      checkOnSave = true,
-      check = {
-        command = "check",
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = { enable = true },
+      },
+      checkOnSave = {
+        command = "clippy",
       },
       diagnostics = {
-        disabled = { "unresolved-proc-macro" },
+        disabled = { "unresolved-proc-macro", "needless_return" },
       },
-      inlayHints = { locationLinks = false },
+      inlayHints = {
+        lifetimeElisionHints = {
+          enable = true,
+          useParameterNames = true,
+        },
+      },
     },
   },
 }
@@ -53,19 +62,16 @@ local hover_actions = {
   auto_focus = false,
 }
 
-return {
-  on_setup = function(server)
-    local rust_tools = requirePlugin "rust-tools"
-    if not rust_tools then
-      server.setup(opts)
-    else
-      rust_tools.setup {
-        server = opts,
-        dap = require "lsp.dap.nvim-dap.rust",
-        tools = {
-          hover_actions = hover_actions,
-        },
-      }
-    end
-  end,
+vim.g.rustaceanvim = {
+  server = opts,
+  dap = require "lsp.dap.nvim-dap.rust",
+  tools = {
+    inlay_hints = {
+      auto = true,
+      show_parameter_hints = false,
+      parameter_hints_prefix = "",
+      other_hints_prefix = "",
+    },
+    hover_actions = hover_actions,
+  },
 }

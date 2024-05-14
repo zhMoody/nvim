@@ -1,10 +1,24 @@
 require("lazy").setup {
   "folke/which-key.nvim",
-  "jose-elias-alvarez/nvim-lsp-ts-utils",
+  -- "jose-elias-alvarez/nvim-lsp-ts-utils",
   "ahmedkhalf/project.nvim",
-  "mfussenegger/nvim-dap",
   "theHamsta/nvim-dap-virtual-text",
-  "rcarriga/nvim-dap-ui",
+
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+    },
+  },
+  {
+    "akinsho/flutter-tools.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim",
+    },
+  },
   "puremourning/vimspector",
   { "p00f/clangd_extensions.nvim", lazy = true },
   "b0o/SchemaStore.nvim",
@@ -12,18 +26,12 @@ require("lazy").setup {
   { "williamboman/mason-lspconfig.nvim", lazy = true },
   "folke/neodev.nvim",
   "neovim/nvim-lspconfig",
-  { "jose-elias-alvarez/null-ls.nvim", event = "BufReadPre" },
+  "limitLiu/nvim-treesitter-rescript",
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "nkrkv/nvim-treesitter-rescript",
-    },
     build = ":TSUpdate",
   },
-  {
-    "kyazdani42/nvim-tree.lua",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
-  },
+  "kyazdani42/nvim-tree.lua",
   {
     "akinsho/bufferline.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
@@ -38,11 +46,16 @@ require("lazy").setup {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
-      "rafamadriz/friendly-snippets",
-      "onsails/lspkind-nvim",
+      -- "rafamadriz/friendly-snippets",
     },
   },
-  { "simrat39/rust-tools.nvim", event = "BufReadPre" },
+  "onsails/lspkind-nvim",
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^4",
+    ft = { "rust" },
+    event = "BufReadPre",
+  },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "kyazdani42/nvim-web-devicons" },
@@ -50,11 +63,14 @@ require("lazy").setup {
   "numToStr/Comment.nvim",
   "windwp/nvim-autopairs",
   "tpope/vim-surround",
-  "lukas-reineke/indent-blankline.nvim",
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   "lewis6991/gitsigns.nvim",
   "NvChad/nvim-colorizer.lua",
   "matze/vim-move",
-  -- 'mhartington/formatter.nvim'
+  {
+    "stevearc/conform.nvim",
+    opts = {},
+  },
   {
     "glepnir/dashboard-nvim",
     dependencies = {
@@ -63,16 +79,13 @@ require("lazy").setup {
     },
   },
   {
-    "akinsho/flutter-tools.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
-    },
-  },
-  {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
+  },
+  {
+    "j-hui/fidget.nvim",
+    event = "LspAttach",
+    opts = {},
   },
   {
     "nvimdev/hlsearch.nvim",
@@ -81,7 +94,12 @@ require("lazy").setup {
       require("hlsearch").setup()
     end,
   },
+  "stevearc/dressing.nvim",
+  "folke/trouble.nvim",
+  { "glepnir/oceanic-material", priority = 1000 },
+  { "glepnir/nerdicons.nvim", cmd = "NerdIcons" },
   -- theme start
+  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
   { "catppuccin/nvim", name = "catppuccin" },
   { "limitLiu/everforest-nvim", lazy = false, priority = 1000 },
   "limitLiu/zephyr-nvim",
