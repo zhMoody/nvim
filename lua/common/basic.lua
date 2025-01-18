@@ -7,7 +7,7 @@ vim.wo.relativenumber = true
 vim.wo.cursorline = true
 vim.wo.cursorcolumn = true
 vim.wo.signcolumn = "yes"
-vim.wo.colorcolumn = "80"
+vim.wo.colorcolumn = "0"
 vim.o.tabstop = 2
 vim.bo.tabstop = 2
 vim.o.softtabstop = 2
@@ -50,9 +50,9 @@ vim.o.pumheight = 10
 vim.o.showtabline = 2
 
 local prefix = vim.fn.expand "/tmp"
-vim.opt.undodir = { prefix .. "/nvim/.undo//" }
-vim.opt.backupdir = { prefix .. "/nvim/.backup//" }
-vim.opt.directory = { prefix .. "/nvim/.swp//" }
+vim.opt.undodir = prefix .. "/nvim/.undo//"
+vim.opt.backupdir = prefix .. "/nvim/.backup//"
+vim.opt.directory = prefix .. "/nvim/.swp//"
 
 vim.o.clipboard = "unnamed,unnamedplus"
 vim.g.loaded_ruby_provider = 0
