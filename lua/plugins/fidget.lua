@@ -1,4 +1,6 @@
+local config_ok, config = pcall(require, "config")
 local ok, fidget = pcall(require, "fidget")
+
 if ok then
   fidget.spinner.patterns.dice = {
     "󰇊",
@@ -29,6 +31,8 @@ if ok then
 
   fidget.setup {
     progress = {
+      ignore = config_ok and config.ignore
+        or { "rust-analyzer", "hls", "lua_ls" },
       display = {
         progress_icon = { pattern = "dice", period = 1 },
         done_icon = "✔",
@@ -44,10 +48,11 @@ if ok then
       override_vim_notify = true,
       filter = vim.log.levels.INFO,
       window = {
-        align = "top",
+        align = "bottom",
         border = "single",
         normal_hl = "Comment",
-        winblend = 0,
+        winblend = 100,
+        relative = "win",
       },
       configs = { default = local_config },
     },

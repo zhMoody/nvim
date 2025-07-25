@@ -11,6 +11,8 @@ map("i", "jj", "<Esc>", opt)
 
 map("i", "<C-f>", "<Right>", opt)
 map("i", "<C-b>", "<Left>", opt)
+map("i", "<C-p>", "<Up>", opt)
+map("i", "<C-n>", "<Down>", opt)
 map("i", "<C-e>", "<End>", opt)
 map("i", "<C-a>", "<C-o>I", opt)
 
@@ -27,7 +29,7 @@ map("n", "<C-u>", "9k", opt)
 map("n", "<C-d>", "9j", opt)
 map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", opt)
 map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", opt)
-map("t", "<leader>tt", "<C-\\><C-n><cmd>Lspsaga term_toggle<CR>", opt)
+map("t", "<localleader>tt", "<C-\\><C-n><cmd>Lspsaga term_toggle<CR>", opt)
 
 map("n", "<C-k>", "<C-w>k", opt)
 map("n", "<C-l>", "<C-w>l", opt)
@@ -83,8 +85,9 @@ M.map_lsp = function(buf)
   buf("n", "<leader>lc", "<cmd>Lspsaga code_action<CR>", opt)
 end
 
-M.map_flutter_tools = function(buf)
-  buf("n", "<leader>ac", "<cmd>Telescope flutter commands<CR>", opt)
+M.map_xcodebuild = function(buf)
+  buf("n", "<localleader>ss", "<cmd>XcodebuildSetup<cr>", opt)
+  buf("n", "<localleader>sr", "<cmd>XcodebuildBuildRun<cr>", opt)
 end
 
 M.cmp = function(c)
@@ -102,11 +105,6 @@ M.cmp = function(c)
     ["<Tab>"] = c.mapping.confirm {
       select = true,
     },
-    ["<S-Tab>"] = c.mapping(function()
-      if c.visible() then
-        c.select_prev_item()
-      end
-    end, { "i", "s" }),
   }
 end
 
@@ -117,7 +115,7 @@ M.comment = {
   },
 }
 
-M.map_dap = function()
+M.map_rust_dap = function()
   map("n", "<leader>ds", "<cmd>RustLsp debuggables<CR>", opt)
   map(
     "n",
@@ -137,6 +135,7 @@ M.map_dap = function()
   map("n", "<leader>do", "<cmd>lua require'dap'.step_out()<CR>", opt)
   map("n", "<leader>di", "<cmd>lua require'dap'.step_into()<CR>", opt)
   map("n", "<leader>dh", "<cmd>lua require'dapui'.eval()<CR>", opt)
+  map("n", "<leader>dt", "<cmd>lua require'dapui'.toggle()<CR>", opt)
 end
 
 return M

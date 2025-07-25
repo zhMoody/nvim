@@ -6,11 +6,8 @@ local opts = {
   on_attach = function(client, buf)
     common.disableFormat(client)
     common.keybinding(buf)
+    common.map_xcodebuild(buf)
   end,
 }
 
-return {
-  on_setup = function(server)
-    server.setup(opts)
-  end,
-}
+return opts

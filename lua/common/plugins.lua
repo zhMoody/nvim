@@ -11,20 +11,19 @@ require("lazy").setup {
       "nvim-neotest/nvim-nio",
     },
   },
+
   {
-    "akinsho/flutter-tools.nvim",
-    lazy = false,
+    "wojciech-kulik/xcodebuild.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
+      "nvim-telescope/telescope.nvim",
+      "MunifTanjim/nui.nvim",
     },
   },
+
   "puremourning/vimspector",
   { "p00f/clangd_extensions.nvim", lazy = true },
   "b0o/SchemaStore.nvim",
   { "williamboman/mason.nvim", lazy = true },
-  { "williamboman/mason-lspconfig.nvim", lazy = true },
-  "folke/neodev.nvim",
   "neovim/nvim-lspconfig",
   "limitLiu/nvim-treesitter-rescript",
   {
@@ -52,7 +51,7 @@ require("lazy").setup {
   "onsails/lspkind-nvim",
   {
     "mrcjkb/rustaceanvim",
-    version = "^4",
+    version = "^6",
     ft = { "rust" },
     event = "BufReadPre",
   },
@@ -94,14 +93,18 @@ require("lazy").setup {
       require("hlsearch").setup()
     end,
   },
-  "stevearc/dressing.nvim",
+  "linrongbin16/lsp-progress.nvim",
+  "folke/snacks.nvim",
   "folke/trouble.nvim",
-  { "glepnir/oceanic-material", priority = 1000 },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+  },
   { "glepnir/nerdicons.nvim", cmd = "NerdIcons" },
   -- theme start
-  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
+  { "ellisonleao/gruvbox.nvim", priority = 1000 },
   { "catppuccin/nvim", name = "catppuccin" },
-  { "limitLiu/everforest-nvim", lazy = false, priority = 1000 },
+  { "neanias/everforest-nvim", lazy = false, priority = 1000 },
   "limitLiu/zephyr-nvim",
   "RRethy/vim-illuminate",
   -- theme end

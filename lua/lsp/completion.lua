@@ -10,11 +10,11 @@ if cmpOk and uiOk then
       end,
     },
     sources = cmp.config.sources {
-      { name = "nvim_lsp" },
+      { name = "nvim_lsp", group_index = 1 },
       -- { name = "cmp_tabnine" },
-      { name = "vsnip" },
-      { name = "buffer" },
-      { name = "path" },
+      { name = "vsnip", group_index = 2 },
+      -- { name = "buffer" },
+      { name = "path", group_index = 3 },
     },
 
     mapping = require("common.keybindings").cmp(cmp),
@@ -49,4 +49,9 @@ if cmpOk and uiOk then
       { name = "cmdline" },
     }),
   })
+end
+
+local ok, m = pcall(require, "utils.cmp")
+if ok then
+  m.cmp()
 end

@@ -1,7 +1,6 @@
-require("mason").setup {}
-require("mason-lspconfig").setup {}
-
-local lsp_config = require "lspconfig"
+require("mason").setup {
+  log_level = vim.log.levels.ERROR,
+}
 
 local servers = {
   lua_ls = require "lsp.languages.lua",
@@ -12,15 +11,13 @@ local servers = {
   hls = require "lsp.languages.haskell",
   sourcekit = require "lsp.languages.swift",
   rescriptls = require "lsp.languages.rescript",
-  dartls = require "lsp.languages.flutter",
+  zls = require "lsp.languages.zig",
+  cssls = require "lsp.languages.css",
 }
 
 for key, config in pairs(servers) do
   if config ~= nil and type(config) == "table" then
-    if config.on_setup then
-      config.on_setup(lsp_config[key])
-    end
-  else
-    lsp_config[key].setup {}
+    vim.lsp.enable(key)
+    vim.lsp.config(key, config)
   end
 end

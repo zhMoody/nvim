@@ -2,23 +2,25 @@ local common = require "lsp.languages.common"
 local opts = {
   capabilities = common.capabilities,
   flags = common.flags,
-  on_attach = function(client, buf)
-    common.disableFormat(client)
+  on_attach = function(_client, buf)
+    -- common.disableFormat(client)
     common.keybinding(buf)
   end,
   handlers = common.handlers,
-  init_options = {
-    extensionConfiguration = {
-      askToStartBuild = false,
-      signatureHelp = { enabled = true },
-      inlayHints = { enable = true },
-      autoRunCodeAnalysis = true,
-      codeLens = true,
+  settings = {
+    rescript = {
+      settings = {
+        askToStartBuild = false,
+        allowBuiltInFormatter = true, -- lower latency
+        incrementalTypechecking = { -- removes the need for external build process
+          enabled = true,
+          acrossFiles = true,
+        },
+        cache = { projectConfig = { enabled = true } }, -- speed up latency dramatically
+        codeLens = true,
+        inlayHints = { enable = true },
+      },
     },
   },
 }
-return {
-  on_setup = function(server)
-    server.setup(opts)
-  end,
-}
+return opts

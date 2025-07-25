@@ -1,25 +1,15 @@
 local common = require "lsp.languages.common"
 
-local keybinding = function(b)
-  local function buf(...)
-    vim.api.nvim_buf_set_keymap(b, ...)
-  end
-
-  local opt = { noremap = true, silent = true }
-  buf("n", "K", "<cmd>RustLsp hover actions<CR>", opt)
-end
-
 local opts = {
   capabilities = common.capabilities,
   flags = common.flags,
   handlers = common.handlers,
-  on_attach = function(client, bufnr)
+  on_attach = function(client, buf)
     common.disableFormat(client)
-    common.keybinding(bufnr)
-    vim.lsp.inlay_hint.enable(true, { bufnr })
-    keybinding(bufnr)
+    common.keybinding(buf)
+    vim.lsp.inlay_hint.enable(true, { bufnr = buf })
   end,
-  settings = {
+  default_settings = {
     ["rust-analyzer"] = {
       procMacro = {
         enable = true,
@@ -33,9 +23,10 @@ local opts = {
       cargo = {
         buildScripts = { enable = true },
       },
-      checkOnSave = {
+      check = {
         command = "clippy",
       },
+      checkOnSave = true,
       diagnostics = {
         disabled = { "unresolved-proc-macro", "needless_return" },
       },
