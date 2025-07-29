@@ -19,7 +19,15 @@ require("lazy").setup {
       "MunifTanjim/nui.nvim",
     },
   },
-
+  {
+    "zhMoody/flutter-tools.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim",
+    },
+    config = true,
+  },
   "puremourning/vimspector",
   { "p00f/clangd_extensions.nvim", lazy = true },
   "b0o/SchemaStore.nvim",

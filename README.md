@@ -2,6 +2,13 @@
 
 **NeoVim v11+**
 
+## Need
+``` python
+
+pip3 install pynvim
+
+```
+
 ## Must be configured
 
 First of all, create a Lua file named "config.lua" in the `lua` directory, it contains the following content:

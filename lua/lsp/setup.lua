@@ -13,6 +13,7 @@ local servers = {
   rescriptls = require "lsp.languages.rescript",
   zls = require "lsp.languages.zig",
   cssls = require "lsp.languages.css",
+  flutterls = require "lsp.languages.flutter",
 }
 
 for key, config in pairs(servers) do
