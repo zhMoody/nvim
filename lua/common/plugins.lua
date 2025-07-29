@@ -20,7 +20,7 @@ require("lazy").setup {
     },
   },
   {
-    "zhMoody/flutter-tools.nvim",
+    "nvim-flutter/flutter-tools.nvim",
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
