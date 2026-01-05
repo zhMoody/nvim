@@ -37,6 +37,9 @@ require("lazy").setup {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.install").prefer_get = true
+    end,
   },
   "kyazdani42/nvim-tree.lua",
   {
