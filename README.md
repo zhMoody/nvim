@@ -3,10 +3,12 @@
 **NeoVim v11+**
 
 ## Need
-``` python
-
+``` bash
+# For Python support
 pip3 install pynvim
 
+# For Image Preview (snacks.nvim / image.nvim)
+brew install imagemagick
 ```
 
 ## Must be configured

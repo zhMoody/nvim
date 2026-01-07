@@ -5,5 +5,8 @@ if ok then
     input = {
       enabled = true,
     },
+    image = {
+      enabled = true,
+    },
   }
 end
