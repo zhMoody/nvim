@@ -21,7 +21,10 @@ local servers = {
 
 require("mason-lspconfig").setup {
   ensure_installed = vim.tbl_filter(function(key)
-    return key ~= "sourcekit" and key ~= "flutterls"
+    return key ~= "sourcekit"
+      and key ~= "flutterls"
+      and key ~= "hls"
+      and key ~= "ocamllsp"
   end, vim.tbl_keys(servers)),
 }
 
