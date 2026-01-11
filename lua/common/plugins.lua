@@ -32,6 +32,8 @@ require("lazy").setup {
   { "p00f/clangd_extensions.nvim", lazy = true },
   "b0o/SchemaStore.nvim",
   { "williamboman/mason.nvim", lazy = true },
+  "williamboman/mason-lspconfig.nvim",
+  "WhoIsSethDaniel/mason-tool-installer.nvim",
   "neovim/nvim-lspconfig",
   "limitLiu/nvim-treesitter-rescript",
   {

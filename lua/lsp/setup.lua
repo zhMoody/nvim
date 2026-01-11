@@ -14,9 +14,22 @@ local servers = {
   zls = require "lsp.languages.zig",
   cssls = require "lsp.languages.css",
   html = require "lsp.languages.html",
-  emmet_ls = require "lsp.languages.emmet",
+  emmet_language_server = require "lsp.languages.emmet",
   flutterls = require "lsp.languages.flutter",
   ts_ls = require "lsp.languages.react",
+}
+
+require("mason-lspconfig").setup {
+  ensure_installed = vim.tbl_filter(function(key)
+    return key ~= "sourcekit" and key ~= "flutterls"
+  end, vim.tbl_keys(servers)),
+}
+
+require("mason-tool-installer").setup {
+  ensure_installed = {
+    "prettier", -- 通用格式化
+    "stylua",   -- Lua 格式化
+  },
 }
 
 for key, config in pairs(servers) do
