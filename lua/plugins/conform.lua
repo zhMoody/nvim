@@ -9,6 +9,17 @@ require("conform").setup {
     haskell = { "ormolu" },
     swift = { "swiftformat" },
     zig = { "zigfmt" },
+
+    -- 前端格式化配置
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescriptreact = { "prettier" },
+    json = { "prettier" },
+    html = { "prettier" },
+    css = { "prettier" },
+    scss = { "prettier" },
+    markdown = { "prettier" },
   },
   formatters = {
     rustfmt = {
@@ -20,3 +31,4 @@ require("conform").setup {
     lsp_fallback = true,
   },
 }
+
