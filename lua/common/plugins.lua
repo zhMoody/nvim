@@ -46,7 +46,7 @@ require("lazy").setup {
   "kyazdani42/nvim-tree.lua",
   {
     "akinsho/bufferline.nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    -- dependencies = { "kyazdani42/nvim-web-devicons" }, -- 由 mini.icons 接管
   },
   {
     "hrsh7th/nvim-cmp",
@@ -70,7 +70,7 @@ require("lazy").setup {
   },
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    -- dependencies = { "kyazdani42/nvim-web-devicons" },
   },
   "numToStr/Comment.nvim",
   "windwp/nvim-autopairs",
@@ -114,6 +114,29 @@ require("lazy").setup {
     ft = "lua",
   },
   { "glepnir/nerdicons.nvim", cmd = "NerdIcons" },
+  
+  -- 新一代图标插件，替代 nvim-web-devicons
+  {
+    "echasnovski/mini.icons",
+    lazy = false,
+    version = false,
+    config = function()
+      require("mini.icons").setup()
+      require("mini.icons").mock_nvim_web_devicons()
+    end,
+  },
+
+  -- UI 增强
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  },
+  { "rcarriga/nvim-notify" }, -- 漂亮的通知弹窗
+
   -- theme start
   { "ellisonleao/gruvbox.nvim", priority = 1000 },
   { "catppuccin/nvim", name = "catppuccin" },

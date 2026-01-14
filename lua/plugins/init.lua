@@ -19,3 +19,5 @@ require "plugins.trouble"
 require "plugins.snacks"
 require "plugins.xcodebuild"
 require "plugins.lsp-progress"
+-- 加载 noice 配置
+require "plugins.noice"

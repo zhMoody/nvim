@@ -29,9 +29,10 @@ map("n", "<C-u>", "9k", opt)
 map("n", "<C-d>", "9j", opt)
 map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", opt)
 map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", opt)
-map("t", "<localleader>tt", "<C-\\><C-n><cmd>Lspsaga term_toggle<CR>", opt)
+-- map("t", "<localleader>tt", "<C-\\><C-n><cmd>Lspsaga term_toggle<CR>", opt)
 
 map("n", "<C-k>", "<C-w>k", opt)
+
 map("n", "<C-l>", "<C-w>l", opt)
 map("n", "<C-j>", "<C-w>j", opt)
 map("n", "<C-h>", "<C-w>h", opt)
@@ -141,5 +142,16 @@ M.map_rust_dap = function()
   map("n", "<leader>dh", "<cmd>lua require'dapui'.eval()<CR>", opt)
   map("n", "<leader>dt", "<cmd>lua require'dapui'.toggle()<CR>", opt)
 end
+
+-- === Snacks Keybindings ===
+-- 切换悬浮终端
+vim.keymap.set({ "n", "t" }, "<leader>tt", function()
+  require("snacks").terminal.toggle()
+end, { desc = "Toggle Terminal" })
+
+-- 打开 Lazygit
+vim.keymap.set("n", "<leader>gg", function()
+  require("snacks").lazygit()
+end, { desc = "Lazygit" })
 
 return M

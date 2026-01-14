@@ -7,11 +7,15 @@
 # Search & Find (Required by Telescope)
 brew install ripgrep fd
 
+# Git GUI (Required by Snacks.lazygit)
+brew install lazygit
+
 # For Image Preview (snacks.nvim / image.nvim)
 brew install imagemagick
 
-# For Python support
+# For Python support (Required by Vimspector, etc.)
 # Note: If using Homebrew Python, you may need --break-system-packages
+# Or create a venv: python3 -m venv ~/.config/nvim/python_venv && ./bin/pip install pynvim
 pip3 install pynvim --break-system-packages
 ```
 
