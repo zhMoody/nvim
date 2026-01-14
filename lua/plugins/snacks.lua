@@ -19,27 +19,27 @@ if ok then
       },
       refresh = 60,
     },
-    indent = { enabled = true },
+    indent = { enabled = false },
     explorer = { enabled = true, replace_netrw = true },
     picker = {
       enabled = true,
       sources = {
         explorer = {
           -- 弹窗样式，且开启右侧预览
-          layout = { preset = "default", preview = true }, 
+          layout = { preset = "default", preview = true },
           jump = { close = true }, -- 强制在打开文件后关闭窗口
           win = {
             list = {
               keys = {
                 ["<Tab>"] = "confirm", -- Tab 现在支持打开文件夹/文件
-                ["o"] = "confirm",     -- o 也支持打开文件夹/文件
+                ["o"] = "confirm", -- o 也支持打开文件夹/文件
                 ["l"] = "confirm",
                 ["h"] = "explorer_close",
-                
+
                 -- 模拟切换窗口：在弹窗模式下，按 C-h/C-l 直接关闭窗口
                 ["<C-h>"] = "close",
                 ["<C-l>"] = "close",
-                
+
                 -- 文件管理
                 ["a"] = "explorer_add",
                 ["d"] = "explorer_del",

@@ -69,6 +69,7 @@ require("lazy").setup {
   "numToStr/Comment.nvim",
   "windwp/nvim-autopairs",
   "tpope/vim-surround",
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   "lewis6991/gitsigns.nvim",
   "NvChad/nvim-colorizer.lua",
   "matze/vim-move",
