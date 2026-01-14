@@ -1,7 +1,6 @@
 require("lazy").setup {
   "folke/which-key.nvim",
   -- "jose-elias-alvarez/nvim-lsp-ts-utils",
-  "ahmedkhalf/project.nvim",
   "theHamsta/nvim-dap-virtual-text",
 
   {
@@ -24,7 +23,6 @@ require("lazy").setup {
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
     },
     config = true,
   },
@@ -43,7 +41,6 @@ require("lazy").setup {
       require("nvim-treesitter.install").prefer_get = true
     end,
   },
-  "kyazdani42/nvim-tree.lua",
   {
     "akinsho/bufferline.nvim",
   },
@@ -72,7 +69,6 @@ require("lazy").setup {
   "numToStr/Comment.nvim",
   "windwp/nvim-autopairs",
   "tpope/vim-surround",
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   "lewis6991/gitsigns.nvim",
   "NvChad/nvim-colorizer.lua",
   "matze/vim-move",
@@ -84,7 +80,6 @@ require("lazy").setup {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
   },
-  -- fidget 已移除
   {
     "nvimdev/hlsearch.nvim",
     event = "BufRead",
@@ -128,6 +123,5 @@ require("lazy").setup {
   { "catppuccin/nvim", name = "catppuccin" },
   { "neanias/everforest-nvim", lazy = false, priority = 1000 },
   "limitLiu/zephyr-nvim",
-  "RRethy/vim-illuminate",
   -- theme end
 }

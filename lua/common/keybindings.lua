@@ -117,7 +117,7 @@ M.comment = {
 }
 
 M.map_flutter_tools = function(buf)
-  buf("n", "<leader>ac", "<cmd>Telescope flutter commands<CR>", opt)
+  buf("n", "<leader>ac", "<cmd>FlutterCommands<CR>", opt)
 end
 
 M.map_rust_dap = function()
