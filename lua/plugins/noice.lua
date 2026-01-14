@@ -10,8 +10,11 @@ noice.setup {
       ["vim.lsp.util.stylize_markdown"] = true,
       ["cmp.entry.get_documentation"] = true,
     },
+    -- 开启 Noice 的 LSP 进度条，接管 fidget 的功能
     progress = {
-      enabled = false,
+      enabled = true,
+      -- format = "lsp_progress", -- 可选：使用 lsp_progress 格式
+      -- view = "mini", -- 默认是 mini，显示在右下角
     },
   },
   presets = {

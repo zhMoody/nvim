@@ -46,7 +46,6 @@ require("lazy").setup {
   "kyazdani42/nvim-tree.lua",
   {
     "akinsho/bufferline.nvim",
-    -- dependencies = { "kyazdani42/nvim-web-devicons" }, -- 由 mini.icons 接管
   },
   {
     "hrsh7th/nvim-cmp",
@@ -58,7 +57,6 @@ require("lazy").setup {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
-      -- "rafamadriz/friendly-snippets",
     },
   },
   "onsails/lspkind-nvim",
@@ -70,7 +68,6 @@ require("lazy").setup {
   },
   {
     "nvim-lualine/lualine.nvim",
-    -- dependencies = { "kyazdani42/nvim-web-devicons" },
   },
   "numToStr/Comment.nvim",
   "windwp/nvim-autopairs",
@@ -94,11 +91,7 @@ require("lazy").setup {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
   },
-  {
-    "j-hui/fidget.nvim",
-    event = "LspAttach",
-    opts = {},
-  },
+  -- fidget 已移除
   {
     "nvimdev/hlsearch.nvim",
     event = "BufRead",

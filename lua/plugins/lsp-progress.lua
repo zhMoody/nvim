@@ -3,6 +3,7 @@ require("lsp-progress").setup {
     if #series_messages == 0 then
       return nil
     end
+    -- 只返回 spinner，不返回具体消息，因为具体消息在右下角 Noice 看
     return {
       name = client_name,
       body = spinner,
@@ -10,28 +11,11 @@ require("lsp-progress").setup {
   end,
 
   format = function(client_messages)
-    local messages_map = {}
-    for _, cli_msg in ipairs(client_messages) do
-      messages_map[cli_msg.name] = cli_msg.body
-    end
-
-    local lsp_clients = vim.lsp.get_clients()
-    if #lsp_clients > 0 then
-      local builder = {}
-      for _, cli in ipairs(lsp_clients) do
-        if
-          type(cli) == "table"
-          and type(cli.name) == "string"
-          and string.len(cli.name) > 0
-        then
-          if messages_map[cli.name] then
-            table.insert(builder, messages_map[cli.name])
-          end
-        end
-      end
-      if #builder > 0 then
-        return table.concat(builder, " ")
-      end
+    -- 如果有任何消息，直接返回一个统一的 Loading 状态
+    if #client_messages > 0 then
+      -- 这里的 client_messages[1].body 就是那个旋转的骰子
+      -- 我们强制只取第一个，这样无论有几个任务，底栏永远只显示一个图标
+      return client_messages[1].body .. " Processing..."
     end
     return ""
   end,
