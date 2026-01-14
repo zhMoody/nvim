@@ -36,6 +36,9 @@ if ok then
       border = "single",
     },
     symbol_in_winbar = { enable = false },
+    lightbulb = {
+      enable = false,
+    },
     diagnostic = { border_follow = false },
     finder = {
       keys = {
