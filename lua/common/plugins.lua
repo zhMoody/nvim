@@ -26,7 +26,29 @@ require("lazy").setup {
       "nvim-lua/plenary.nvim",
       "stevearc/dressing.nvim",
     },
-    config = true,
+    config = function()
+      local common = require "lsp.languages.common"
+      require("flutter-tools").setup {
+        lsp = {
+          capabilities = common.capabilities,
+          settings = {
+            showTodos = true,
+            completeFunctionCalls = true,
+            renameFilesWithClasses = "prompt",
+            updateImportsOnRename = true,
+          },
+          on_attach = function(client, buf)
+            common.disableFormat(client)
+            common.keybinding(buf)
+            require("common.keybindings").map_flutter_tools(buf)
+          end,
+        },
+        ui = {
+          border = "single",
+          notification_style = "plugin",
+        },
+      }
+    end,
   },
   "puremourning/vimspector",
   { "p00f/clangd_extensions.nvim", lazy = true },
@@ -84,7 +106,6 @@ require("lazy").setup {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
   },
-  -- fidget 已移除
   {
     "nvimdev/hlsearch.nvim",
     event = "BufRead",
@@ -100,8 +121,6 @@ require("lazy").setup {
     ft = "lua",
   },
   { "glepnir/nerdicons.nvim", cmd = "NerdIcons" },
-  
-  -- 新一代图标插件，替代 nvim-web-devicons
   {
     "echasnovski/mini.icons",
     lazy = false,
@@ -121,7 +140,7 @@ require("lazy").setup {
       "rcarriga/nvim-notify",
     },
   },
-  { "rcarriga/nvim-notify" }, -- 漂亮的通知弹窗
+  { "rcarriga/nvim-notify" },
 
   -- theme start
   { "ellisonleao/gruvbox.nvim", priority = 1000 },
@@ -131,3 +150,4 @@ require("lazy").setup {
   "RRethy/vim-illuminate",
   -- theme end
 }
+

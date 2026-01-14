@@ -116,8 +116,36 @@ M.comment = {
   },
 }
 
-M.map_flutter_tools = function(buf)
-  buf("n", "<leader>ac", "<cmd>Telescope flutter commands<CR>", opt)
+M.map_flutter_tools = function(bufnr)
+  local flutter_cmds = {
+    { text = "󰐊 Run App", cmd = "FlutterRun" },
+    { text = "󰜉 Hot Reload", cmd = "FlutterReload" },
+    { text = "󰜐 Hot Restart", cmd = "FlutterRestart" },
+    { text = "󰗼 Quit", cmd = "FlutterQuit" },
+    { text = "󱔗 List Devices", cmd = "FlutterDevices" },
+    { text = "󰛵 List Emulators", cmd = "FlutterEmulators" },
+    { text = "󱠂 Open DevTools", cmd = "FlutterDevTools" },
+    { text = "󰙨 View Log", cmd = "FlutterLog" },
+    { text = "󱖫 Toggle Outline", cmd = "FlutterOutlineToggle" },
+  }
+
+  vim.keymap.set("n", "<leader>ac", function()
+    vim.ui.select(flutter_cmds, {
+      prompt = "Flutter Commands",
+      format_item = function(item)
+        return item.text
+      end,
+    }, function(item)
+      if item then
+        vim.cmd(item.cmd)
+      end
+    end)
+  end, {
+    buffer = bufnr,
+    noremap = true,
+    silent = true,
+    desc = "Flutter Commands",
+  })
 end
 
 M.map_rust_dap = function()

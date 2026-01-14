@@ -15,7 +15,6 @@ local servers = {
   cssls = require "lsp.languages.css",
   html = require "lsp.languages.html",
   emmet_language_server = require "lsp.languages.emmet",
-  flutterls = require "lsp.languages.flutter",
   ts_ls = require "lsp.languages.react",
 }
 
@@ -31,7 +30,7 @@ require("mason-lspconfig").setup {
 require("mason-tool-installer").setup {
   ensure_installed = {
     "prettier", -- 通用格式化
-    "stylua",   -- Lua 格式化
+    "stylua", -- Lua 格式化
   },
 }
 

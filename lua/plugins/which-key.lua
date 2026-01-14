@@ -6,13 +6,33 @@ wk.add {
     "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
     desc = "Comment",
   },
-  { "<leader>a", group = "Search" },
-  { "<leader>ab", function() require("snacks").picker.buffers() end, desc = "Search Buffer" },
-  { "<leader>ag", function() require("snacks").picker.grep() end, desc = "Search Keyword" },
+  { "<leader>a", group = "Action Code" },
+  {
+    "<leader>ab",
+    function()
+      require("snacks").picker.buffers()
+    end,
+    desc = "Search Buffer",
+  },
+  {
+    "<leader>ag",
+    function()
+      require("snacks").picker.grep()
+    end,
+    desc = "Search Keyword",
+  },
+  { "<leader>s", group = "Search" },
+  { "<leader>sc", ":nohlsearch<CR>", desc = "Clear Highlight Result" },
   { "<leader>b", group = "Buffer" },
   { "<leader>bk", ":bw<CR>", desc = "Kill Buffer" },
   { "<leader>d", group = "Debugger" },
-  { "<leader>dP", desc = "Clear All BreakPoints" },
+  {
+    "<leader>fd",
+    function()
+      require("snacks").picker.files()
+    end,
+    desc = "Find Files",
+  },
   { "<leader>dc", desc = "Continue" },
   { "<leader>dh", desc = "Help" },
   { "<leader>di", desc = "Step Into" },
@@ -24,7 +44,13 @@ wk.add {
   { "<leader>dt", desc = "Toggle Debugger View" },
   { "<leader>f", group = "File" },
   { "<leader>fc", "<cmd>NvimTreeCollapse<CR>", desc = "Tree Collapse" },
-  { "<leader>fd", function() require("snacks").picker.files() end, desc = "Find Files" },
+  {
+    "<leader>fd",
+    function()
+      require("snacks").picker.files()
+    end,
+    desc = "Find Files",
+  },
   { "<leader>fr", "<cmd>NvimTreeRefresh<CR>", desc = "Tree Refresh" },
   { "<leader>fs", ":update<CR>", desc = "Save" },
   { "<leader>ft", "<cmd>NvimTreeToggle<CR>", desc = "Toggle Tree" },
@@ -47,7 +73,9 @@ wk.add {
   { "<leader>p", group = "Projects" },
   {
     "<leader>pt",
-    function() require("snacks").picker.projects() end,
+    function()
+      require("snacks").picker.projects()
+    end,
     desc = "Show Recent Projects",
   },
   -- { "<leader>s", group = "Search" },
@@ -80,7 +108,13 @@ wk.add {
   { "<localleader>l", group = "Lsp" },
   { "<localleader>lr", "<cmd>LspRestart<CR>", desc = "Lsp Restart" },
   { "<localleader>n", "<cmd>NerdIcons<CR>", desc = "Open Nerd Icons" },
-  { "<localleader>o", function() require("snacks").picker.files() end, desc = "Open File" },
+  {
+    "<localleader>o",
+    function()
+      require("snacks").picker.files()
+    end,
+    desc = "Open File",
+  },
   { "<localleader>t", group = "Quickfix List" },
   {
     "<localleader>tt",
