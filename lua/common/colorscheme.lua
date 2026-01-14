@@ -10,5 +10,11 @@ vim.schedule(function()
     vim.g.colors_name = color
   end
   vim.o.background = background
-  vim.g.python3_host_prog = config.python3_host_prog or "/usr/bin/python3"
+  if config.python3_host_prog then
+    vim.g.python3_host_prog = config.python3_host_prog
+  elseif vim.fn.has "win32" == 1 then
+    vim.g.python3_host_prog = vim.fn.exepath "python"
+  else
+    vim.g.python3_host_prog = "/usr/bin/python3"
+  end
 end)

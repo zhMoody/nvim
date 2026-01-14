@@ -14,6 +14,7 @@ require("lazy").setup {
 
   {
     "wojciech-kulik/xcodebuild.nvim",
+    cond = vim.fn.has "mac" == 1,
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "MunifTanjim/nui.nvim",
@@ -57,7 +58,6 @@ require("lazy").setup {
   "williamboman/mason-lspconfig.nvim",
   "WhoIsSethDaniel/mason-tool-installer.nvim",
   "neovim/nvim-lspconfig",
-  "limitLiu/nvim-treesitter-rescript",
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -150,4 +150,3 @@ require("lazy").setup {
   "RRethy/vim-illuminate",
   -- theme end
 }
-

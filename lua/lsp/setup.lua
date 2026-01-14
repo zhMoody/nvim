@@ -10,7 +10,6 @@ local servers = {
   ocamllsp = require "lsp.languages.ocaml",
   hls = require "lsp.languages.haskell",
   sourcekit = require "lsp.languages.swift",
-  rescriptls = require "lsp.languages.rescript",
   zls = require "lsp.languages.zig",
   cssls = require "lsp.languages.css",
   html = require "lsp.languages.html",

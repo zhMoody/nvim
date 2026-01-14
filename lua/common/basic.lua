@@ -49,10 +49,24 @@ vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.pumheight = 10
 vim.o.showtabline = 2
 
-local prefix = vim.fn.expand "/tmp"
-vim.opt.undodir = { prefix .. "/nvim/.undo//" }
-vim.opt.backupdir = { prefix .. "/nvim/.backup//" }
-vim.opt.directory = { prefix .. "/nvim/.swp//" }
+local prefix = vim.fn.stdpath "state"
+local undodir = prefix .. "/undo//"
+local backupdir = prefix .. "/backup//"
+local swapdir = prefix .. "/swp//"
+
+vim.opt.undodir = undodir
+vim.opt.backupdir = backupdir
+vim.opt.directory = swapdir
+
+if vim.fn.isdirectory(prefix .. "/undo") == 0 then
+  vim.fn.mkdir(prefix .. "/undo", "p")
+end
+if vim.fn.isdirectory(prefix .. "/backup") == 0 then
+  vim.fn.mkdir(prefix .. "/backup", "p")
+end
+if vim.fn.isdirectory(prefix .. "/swp") == 0 then
+  vim.fn.mkdir(prefix .. "/swp", "p")
+end
 
 vim.o.clipboard = "unnamed,unnamedplus"
 vim.g.loaded_ruby_provider = 0
