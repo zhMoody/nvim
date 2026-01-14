@@ -81,13 +81,6 @@ require("lazy").setup {
     opts = {},
   },
   {
-    "glepnir/dashboard-nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-  },
-  {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
   },
