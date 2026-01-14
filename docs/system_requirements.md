@@ -1,8 +1,41 @@
 # System Requirements & Installation Guide
 
-While this configuration uses `mason.nvim` to automatically manage most Language Servers (LSP), some tools are better installed via system package managers (Homebrew) due to complexity, dependencies, or system integration.
+While this configuration uses `mason.nvim` to automatically manage most Language Servers (LSP), some tools are better installed via system package managers due to complexity, dependencies, or system integration.
 
-## Recommended System Installations (Homebrew)
+## Windows (Scoop)
+
+### 1. Essential Tools
+Ensure you have the `extras` and `nerd-fonts` buckets added to Scoop:
+```powershell
+scoop bucket add extras
+scoop bucket add nerd-fonts
+```
+
+*   **Compiler (Required by Treesitter)**
+    *   Command: `scoop install gcc`
+
+*   **Git & Search Tools**
+    *   Command: `scoop install git lazygit ripgrep fd`
+
+*   **Fonts**
+    *   Command: `scoop install JetBrainsMono-NF`
+
+### 2. Language Servers (System Install)
+
+*   **Dart / Flutter**
+    *   LSP is part of the Flutter SDK.
+    *   Command: `scoop install flutter`
+
+*   **Rust (`rust_analyzer`)**
+    *   Highly recommended to manage via `rustup` on Windows.
+    *   Command: `scoop install rustup` then `rustup component add rust-analyzer`
+
+*   **Swift / OCaml / Haskell**
+    *   **Swift**: Install Swift for Windows (Official Installer).
+    *   **Haskell**: `scoop install ghc` or use `ghcup`.
+    *   **OCaml**: Recommended to use **WSL2** for OCaml development, as native Windows support is limited.
+
+## macOS (Homebrew)
 
 ### 1. Essential (Mason may fail or is not recommended)
 
