@@ -10,12 +10,13 @@ if ok then
     terminal = { enabled = true },
     -- 大文件自动优化 (防止卡死)
     bigfile = { enabled = true },
-    -- 快速文件处理
-    quickfile = { enabled = true },
-    -- Lazygit 集成
-    lazygit = {
-      enabled = true,
-      configure = true,
+        -- 快速文件处理
+        quickfile = { enabled = true },
+        -- 启用全新的 Picker (替代 Telescope)
+        picker = { enabled = true },
+        -- Lazygit 集成
+        lazygit = { 
+          enabled = true,      configure = true,
       config = {
         os = { editPreset = "nvim-remote" },
         gui = { nerdFontsVersion = "3" },
@@ -28,59 +29,18 @@ if ok then
       },
     },
     words = { enabled = true },
-    dashboard = {
+    dashboard = { 
       enabled = true,
       preset = {
         keys = {
-          {
-            icon = " ",
-            key = "f",
-            desc = "Find File",
-            action = ":Telescope find_files",
-          },
-          {
-            icon = " ",
-            key = "n",
-            desc = "New File",
-            action = ":ene | startinsert",
-          },
-          {
-            icon = " ",
-            key = "o",
-            desc = "Open Folder",
-            action = ":NvimTreeFocus",
-          }, -- 新增项
-          {
-            icon = " ",
-            key = "g",
-            desc = "Find Text",
-            action = ":Telescope live_grep",
-          },
-          {
-            icon = " ",
-            key = "r",
-            desc = "Recent Files",
-            action = ":Telescope oldfiles",
-          },
-          {
-            icon = " ",
-            key = "c",
-            desc = "Config",
-            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-          },
-          {
-            icon = " ",
-            key = "s",
-            desc = "Restore Session",
-            section = "session",
-          },
-          {
-            icon = "󰒲 ",
-            key = "L",
-            desc = "Lazy",
-            action = ":Lazy",
-            enabled = package.loaded.lazy ~= nil,
-          },
+          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "o", desc = "Open Folder", action = ":NvimTreeFocus" },
+          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
       },
