@@ -1,12 +1,11 @@
 local theme = {
-  -- 关键修改：fill 改为默认背景（透明），这样就是黑色的
   fill = "TabLineFill",
   -- 左侧 Logo 颜色：紫色
   head = { bg = "#907aa9", fg = "#f2e9de", style = "bold" },
   -- 激活 Tab 颜色：砖红色
   current_tab = { bg = "#d75f5f", fg = "#f2e9de", style = "bold" },
   -- 未激活 Tab 颜色：深暗色调，适合暗色主题
-  tab = { bg = "#3c3833", fg = "#d75f39" },
+  tab = { bg = "#3c3836", fg = "#d75f5f" },
   tail = { bg = "TabLineFill", fg = "#907aa9" },
 }
 
@@ -21,6 +20,28 @@ local function get_icon(filename)
     { default = true }
   )
   return icon or "󰈚"
+end
+
+local function get_diagnostics(bufid)
+  local diagnostics = vim.diagnostic.get(bufid)
+  local count = { error = 0, warn = 0 }
+
+  for _, diagnostic in ipairs(diagnostics) do
+    if diagnostic.severity == vim.diagnostic.severity.ERROR then
+      count.error = count.error + 1
+    elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+      count.warn = count.warn + 1
+    end
+  end
+
+  local res = ""
+  if count.error > 0 then
+    res = res .. "🙅 " .. count.error
+  end
+  if count.warn > 0 then
+    res = res .. "⚠️ " .. count.warn
+  end
+  return res
 end
 
 require("tabby").setup {
@@ -40,24 +61,19 @@ require("tabby").setup {
         local name = buf.name() == "" and "[No Name]"
           or vim.fn.fnamemodify(buf.name(), ":t")
 
-        local changed = buf.is_changed() and "●" or ""
+        local changed = buf.is_changed() and " ●" or ""
+        local diag = get_diagnostics(buf.id)
 
         return {
-          -- 左侧切角
           line.sep("", hl, theme.fill),
-
-          -- 内容区域
-          "",
           icon,
-          " ",
-          name,
           "",
+          name,
+          diag,
           changed,
 
-          -- 右侧切角
           line.sep("", hl, theme.fill),
 
-          -- 样式与间距
           hl = hl,
           margin = " ",
         }
@@ -65,6 +81,11 @@ require("tabby").setup {
 
       line.spacer(),
       hl = theme.fill,
+
+      {
+        line.sep("", theme.head, theme.fill),
+        { " 󰈚 ", hl = theme.head },
+      },
     }
   end,
 }
