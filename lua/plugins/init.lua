@@ -1,6 +1,5 @@
 require "plugins.lualine"
 require "plugins.nvim-tree"
-require "plugins.bufferline"
 require "plugins.nvim-treesitter"
 require "plugins.comment"
 require "plugins.which-key"
@@ -18,4 +17,5 @@ require "plugins.snacks"
 require "plugins.xcodebuild"
 require "plugins.lsp-progress"
 require "plugins.noice"
+require "plugins.tabby"
 

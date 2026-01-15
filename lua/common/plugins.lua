@@ -67,9 +67,6 @@ require("lazy").setup {
   },
   "kyazdani42/nvim-tree.lua",
   {
-    "akinsho/bufferline.nvim",
-  },
-  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
@@ -132,6 +129,7 @@ require("lazy").setup {
   },
 
   -- UI 增强
+  { "nanozuki/tabby.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
