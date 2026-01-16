@@ -24,22 +24,27 @@ end
 
 local function get_diagnostics(bufid)
   local diagnostics = vim.diagnostic.get(bufid)
-  local count = { error = 0, warn = 0 }
+  local count = { error = 0, warn = 0, info = 0 }
 
   for _, diagnostic in ipairs(diagnostics) do
     if diagnostic.severity == vim.diagnostic.severity.ERROR then
       count.error = count.error + 1
     elseif diagnostic.severity == vim.diagnostic.severity.WARN then
       count.warn = count.warn + 1
+    elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+      count.info = count.info + 1
     end
   end
 
   local res = ""
   if count.error > 0 then
-    res = res .. "🙅 " .. count.error
+    res = res .. "  " .. count.error
   end
   if count.warn > 0 then
-    res = res .. "⚠️ " .. count.warn
+    res = res .. "  " .. count.warn
+  end
+  if count.info > 0 then
+    res = res .. "  " .. count.info
   end
   return res
 end

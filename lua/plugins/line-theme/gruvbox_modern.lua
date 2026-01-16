@@ -51,6 +51,37 @@ local config = {
     lualine_c = {},
     lualine_x = {},
   },
+  winbar = {
+    lualine_a = {
+      {
+        "filename",
+        path = 1,
+        color = { fg = colors.magenta, bg = colors.dark, gui = "bold" },
+        separator = { right = "" },
+      },
+    },
+    lualine_c = {
+      {
+        function()
+          return require("nvim-navic").get_location()
+        end,
+        cond = function()
+          return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+        end,
+        color = { fg = colors.fg, bg = "NONE" },
+      },
+    },
+  },
+  inactive_winbar = {
+    lualine_a = {
+      {
+        "filename",
+        path = 1,
+        color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
+        separator = { right = "" },
+      },
+    },
+  },
 }
 
 local function ins_left(component)
@@ -148,21 +179,24 @@ ins_left {
 ins_left {
   "filename",
   cond = conditions.buffer_not_empty,
-  color = { fg = colors.magenta, gui = "bold" },
+  color = { fg = colors.magenta, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
   path = 1,
 }
 
 ins_left {
   "filesize",
   cond = conditions.buffer_not_empty,
-  color = { fg = colors.fg, gui = "bold" },
+  color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
 }
 
 -- 5. Git 分支
 ins_left {
   "branch",
   icon = "",
-  color = { fg = colors.violet, gui = "bold" },
+  color = { fg = colors.violet, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
 }
 
 -- 6. Git 状态
@@ -184,6 +218,8 @@ ins_left {
     modified = { fg = colors.orange },
     removed = { fg = colors.red },
   },
+  color = { bg = colors.dark },
+  separator = { left = "", right = "" },
   cond = conditions.hide_in_width,
 }
 
@@ -196,7 +232,8 @@ ins_left {
 -- === 右侧组件 ===
 ins_right {
   "searchcount",
-  color = { fg = colors.yellow, gui = "bold" },
+  color = { fg = colors.yellow, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
 }
 
 ins_right {
@@ -208,13 +245,16 @@ ins_right {
     warn = { fg = colors.yellow },
     info = { fg = colors.cyan },
   },
+  color = { bg = colors.dark },
+  separator = { left = "", right = "" },
 }
 
 ins_right {
   function()
     return require("lsp-progress").progress()
   end,
-  color = { fg = colors.cyan, gui = "bold" },
+  color = { fg = colors.cyan, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
 }
 
 ins_right {
@@ -234,18 +274,28 @@ ins_right {
     return "No LSP"
   end,
   icon = "󰄭",
-  color = { fg = colors.blue, gui = "bold" },
+  color = { fg = colors.blue, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
 }
 
 ins_right {
   "encoding",
   fmt = string.upper,
-  color = { fg = colors.green, gui = "bold" },
+  color = { fg = colors.green, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
 }
 
-ins_right { "location" }
+ins_right {
+  "location",
+  color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
+}
 
-ins_right { "progress", color = { fg = colors.fg, gui = "bold" } }
+ins_right {
+  "progress",
+  color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
+}
 
 ins_right {
   function()
