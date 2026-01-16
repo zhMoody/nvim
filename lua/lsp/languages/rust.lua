@@ -7,7 +7,7 @@ local opts = {
   on_attach = function(client, buf)
     common.disableFormat(client)
     common.keybinding(buf)
-    vim.lsp.inlay_hint.enable(true, { bufnr = buf })
+    vim.lsp.inlay_hint.enable(false, { bufnr = buf })
   end,
   default_settings = {
     ["rust-analyzer"] = {
@@ -58,7 +58,7 @@ vim.g.rustaceanvim = {
   dap = require "lsp.dap.nvim-dap.rust",
   tools = {
     inlay_hints = {
-      auto = true,
+      auto = false,
       show_parameter_hints = false,
       parameter_hints_prefix = "",
       other_hints_prefix = "",
