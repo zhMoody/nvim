@@ -13,7 +13,7 @@ local colors = {
   magenta = "#d3869b",
   blue = "#7daea3",
   red = "#ea6962",
-  dark = "#1d2021", -- 深色背景，用于胶囊内部文字
+  dark = "#1d2021",
 }
 
 local conditions = {
@@ -58,37 +58,6 @@ local config = {
     lualine_z = {},
     lualine_c = {},
     lualine_x = {},
-  },
-  winbar = {
-    lualine_a = {
-      {
-        "filename",
-        path = 1,
-        color = { fg = colors.magenta, bg = colors.dark, gui = "bold" },
-        separator = { right = "" },
-      },
-    },
-    lualine_c = {
-      {
-        function()
-          return require("nvim-navic").get_location()
-        end,
-        cond = function()
-          return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-        end,
-        color = { fg = colors.fg, bg = "NONE" },
-      },
-    },
-  },
-  inactive_winbar = {
-    lualine_a = {
-      {
-        "filename",
-        path = 1,
-        color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
-        separator = { right = "" },
-      },
-    },
   },
 }
 
@@ -322,3 +291,4 @@ ins_right {
 }
 
 lualine.setup(config)
+

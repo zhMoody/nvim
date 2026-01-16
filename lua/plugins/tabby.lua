@@ -14,11 +14,7 @@ local function get_icon(filename)
     return "󰈚"
   end
   local extension = vim.fn.fnamemodify(filename, ":e")
-  local icon = require("nvim-web-devicons").get_icon(
-    filename,
-    extension,
-    { default = true }
-  )
+  local icon, _ = require("mini.icons").get("file", filename)
   return icon or "󰈚"
 end
 

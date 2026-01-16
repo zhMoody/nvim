@@ -127,9 +127,7 @@ require("lazy").setup {
       require("mini.icons").mock_nvim_web_devicons()
     end,
   },
-
-  -- UI 增强
-  { "nanozuki/tabby.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+  { "nanozuki/tabby.nvim", dependencies = "echasnovski/mini.icons" },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -148,4 +146,3 @@ require("lazy").setup {
   "RRethy/vim-illuminate",
   -- theme end
 }
-
