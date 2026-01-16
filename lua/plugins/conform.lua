@@ -11,6 +11,7 @@ require("conform").setup {
     zig = { "zigfmt" },
 
     -- 前端格式化配置
+    vue = { "prettier" },
     javascript = { "prettier" },
     typescript = { "prettier" },
     javascriptreact = { "prettier" },
@@ -27,7 +28,7 @@ require("conform").setup {
     },
   },
   format_on_save = {
-    timeout_ms = 500,
+    timeout_ms = 2000,
     lsp_fallback = true,
   },
 }
