@@ -8,17 +8,7 @@ local opts = {
     common.disableFormat(client)
     common.keybinding(buf)
   end,
-  settings = {
-    typescript = {
-      preferences = {
-        autoClosingTags = true,
-      },
-    },
-    javascript = {
-      preferences = {
-        autoClosingTags = true,
-      },
-    },
-  },
+  -- Hybrid Mode is enabled by default in newer versions of Volar
+  -- No extra init_options needed
 }
 return opts
