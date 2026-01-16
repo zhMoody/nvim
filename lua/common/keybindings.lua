@@ -182,4 +182,7 @@ vim.keymap.set("n", "<leader>gg", function()
   require("snacks").lazygit()
 end, { desc = "Lazygit" })
 
+-- === Markdown Keybindings ===
+vim.keymap.set("n", "<leader>mt", "<cmd>RenderMarkdown toggle<CR>", { desc = "Markdown Toggle" })
+
 return M
