@@ -3,7 +3,8 @@
 **NeoVim v11+**
 
 ## Need
-``` bash
+
+```bash
 # Search & Find (Required by Telescope)
 brew install ripgrep fd
 
@@ -30,10 +31,10 @@ First of all, create a Lua file named "config.lua" in the `lua` directory, it co
 
 ```lua
 return {
-  colorscheme = "everforest",
+  colorscheme = "gruvbox",
   background = "light",
   python3_host_prog = "/opt/homebrew/bin/python3",
-  lua_line = "bubbles",
+  lua_line = "gruvbox_modern",
   ignore = { "rust-analyzer", "hls" },
 }
 ```

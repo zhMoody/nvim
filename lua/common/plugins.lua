@@ -120,6 +120,14 @@ require("lazy").setup {
   },
   { "glepnir/nerdicons.nvim", cmd = "NerdIcons" },
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
+    ft = { "markdown" },
+    config = function()
+      require("render-markdown").setup {}
+    end,
+  },
+  {
     "echasnovski/mini.icons",
     lazy = false,
     version = false,
