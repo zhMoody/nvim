@@ -30,8 +30,16 @@ local config = {
     component_separators = "",
     section_separators = "",
     theme = {
-      normal = { c = { fg = colors.fg, bg = colors.bg } },
-      inactive = { c = { fg = colors.fg, bg = colors.bg } },
+      normal = {
+        a = { fg = colors.fg, bg = colors.bg },
+        b = { fg = colors.fg, bg = colors.bg },
+        c = { fg = colors.fg, bg = colors.bg },
+      },
+      inactive = {
+        a = { fg = colors.fg, bg = colors.bg },
+        b = { fg = colors.fg, bg = colors.bg },
+        c = { fg = colors.fg, bg = colors.bg },
+      },
     },
     globalstatus = true,
   },
@@ -99,13 +107,13 @@ ins_left {
       n = colors.red,
       i = colors.green,
       v = colors.blue,
-      [""] = colors.blue,
+      ["\22"] = colors.blue,
       V = colors.blue,
       c = colors.magenta,
       no = colors.red,
       s = colors.orange,
       S = colors.orange,
-      [""] = colors.orange,
+      ["\19"] = colors.orange,
       ic = colors.yellow,
       R = colors.violet,
       Rv = colors.violet,
@@ -123,7 +131,7 @@ ins_left {
       "hi! LualineModeMain guifg="
         .. colors.dark
         .. " guibg="
-        .. mode_color[vim.fn.mode()]
+        .. (mode_color[vim.fn.mode()] or colors.red)
         .. " gui=bold"
     )
 
@@ -145,13 +153,13 @@ ins_left {
       n = colors.red,
       i = colors.green,
       v = colors.blue,
-      [""] = colors.blue,
+      ["\22"] = colors.blue,
       V = colors.blue,
       c = colors.magenta,
       no = colors.red,
       s = colors.orange,
       S = colors.orange,
-      [""] = colors.orange,
+      ["\19"] = colors.orange,
       ic = colors.yellow,
       R = colors.violet,
       Rv = colors.violet,
@@ -165,7 +173,7 @@ ins_left {
     }
     vim.api.nvim_command(
       "hi! LualineModeTail guifg="
-        .. mode_color[vim.fn.mode()]
+        .. (mode_color[vim.fn.mode()] or colors.red)
         .. " guibg="
         .. colors.bg
     )
