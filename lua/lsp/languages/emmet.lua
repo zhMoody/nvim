@@ -11,6 +11,12 @@ local opts = {
     "css",
     "typescriptreact",
     "javascriptreact",
+    "rescript",
+  },
+  init_options = {
+    includeLanguages = {
+      rescript = "html",
+    },
   },
 }
 
