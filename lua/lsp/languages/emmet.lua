@@ -12,6 +12,7 @@ local opts = {
     "typescriptreact",
     "javascriptreact",
     "javascript", -- 支持 .js 文件
+    "vue",
     "rescript",
   },
   init_options = {

@@ -8,6 +8,8 @@ local opts = {
     common.disableFormat(client)
     common.keybinding(buf)
   end,
+  filetypes = { "vue" },
+  cmd = { vim.fn.stdpath "data" .. "/mason/bin/vue-language-server", "--stdio" },
   -- Hybrid Mode is enabled by default in newer versions of Volar
   -- No extra init_options needed
 }

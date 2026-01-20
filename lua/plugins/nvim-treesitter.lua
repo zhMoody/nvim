@@ -17,6 +17,7 @@ require("nvim-treesitter.configs").setup {
     "dart",
     "markdown",
     "markdown_inline",
+    "vue",
   },
   modules = {},
   sync_install = false,
