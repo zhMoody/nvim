@@ -11,6 +11,7 @@ require("conform").setup {
     zig = { "zigfmt" },
 
     -- 前端格式化配置
+    vue = { "prettier" },
     javascript = { "prettier" },
     typescript = { "prettier" },
     javascriptreact = { "prettier" },

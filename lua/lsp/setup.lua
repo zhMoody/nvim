@@ -15,6 +15,7 @@ local servers = {
   html = require "lsp.languages.html",
   emmet_language_server = require "lsp.languages.emmet",
   ts_ls = require "lsp.languages.react",
+  vue_ls = require "lsp.languages.vue",
 }
 
 require("mason-lspconfig").setup {
@@ -23,6 +24,7 @@ require("mason-lspconfig").setup {
       and key ~= "flutterls"
       and key ~= "hls"
       and key ~= "ocamllsp"
+      and key ~= "vue_ls" -- 避免 mason-lspconfig 报错，手动在下面安装
   end, vim.tbl_keys(servers)),
 }
 
@@ -30,6 +32,7 @@ require("mason-tool-installer").setup {
   ensure_installed = {
     "prettier", -- 通用格式化
     "stylua", -- Lua 格式化
+    "vue-language-server", -- Vue LSP (对应 volar)
   },
 }
 

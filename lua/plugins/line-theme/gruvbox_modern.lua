@@ -122,27 +122,39 @@ ins_left {
       t = colors.red,
     }
     -- 背景色跟随模式，前景色为深色
-    vim.api.nvim_command('hi! LualineModeMain guifg=' .. colors.dark .. ' guibg=' .. mode_color[vim.fn.mode()] .. ' gui=bold')
-    return ''
+    vim.api.nvim_command(
+      "hi! LualineModeMain guifg="
+        .. colors.dark
+        .. " guibg="
+        .. (mode_color[vim.fn.mode()] or colors.red)
+        .. " gui=bold"
+    )
+
+    local f_icons = {
+      unix = "",
+      dos = "",
+      mac = "",
+    }
+    return " " .. (f_icons[vim.bo.fileformat] or "")
   end,
-  color = 'LualineModeMain',
+  color = "LualineModeMain",
   padding = { right = 1 },
 }
 
--- 3. 左侧收尾圆头
+-- 3. 左侧收尾 (改成切角)
 ins_left {
   function()
     local mode_color = {
       n = colors.red,
       i = colors.green,
       v = colors.blue,
-      [''] = colors.blue,
+      ["\22"] = colors.blue,
       V = colors.blue,
       c = colors.magenta,
       no = colors.red,
       s = colors.orange,
       S = colors.orange,
-      [''] = colors.orange,
+      ["\19"] = colors.orange,
       ic = colors.yellow,
       R = colors.violet,
       Rv = colors.violet,
@@ -150,117 +162,158 @@ ins_left {
       ce = colors.red,
       r = colors.cyan,
       rm = colors.cyan,
-      ['r?'] = colors.cyan,
-      ['!'] = colors.red,
+      ["r?"] = colors.cyan,
+      ["!"] = colors.red,
       t = colors.red,
     }
-    vim.api.nvim_command('hi! LualineModeTail guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' .. colors.bg)
-    return ''
+    vim.api.nvim_command(
+      "hi! LualineModeTail guifg="
+        .. (mode_color[vim.fn.mode()] or colors.red)
+        .. " guibg="
+        .. colors.bg
+    )
+    return ""
   end,
-  color = 'LualineModeTail',
+  color = "LualineModeTail",
   padding = { left = 0, right = 1 },
 }
 
 -- 4. 文件名
 ins_left {
-  'filename',
+  "filename",
   cond = conditions.buffer_not_empty,
-  color = { fg = colors.magenta, gui = 'bold' },
+  color = { fg = colors.magenta, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
   path = 1,
+}
+
+ins_left {
+  "filesize",
+  cond = conditions.buffer_not_empty,
+  color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
 }
 
 -- 5. Git 分支
 ins_left {
-  'branch',
-  icon = '',
-  color = { fg = colors.violet, gui = 'bold' },
+  "branch",
+  icon = "",
+  color = { fg = colors.violet, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
 }
 
 -- 6. Git 状态
 ins_left {
-  'diff',
+  "diff",
   source = function()
     local gitsigns = vim.b.gitsigns_status_dict
     if gitsigns then
       return {
         added = gitsigns.added,
         modified = gitsigns.changed,
-        removed = gitsigns.removed
+        removed = gitsigns.removed,
       }
     end
   end,
-  symbols = { added = ' ', modified = '󰏬 ', removed = ' ' },
+  symbols = { added = " ", modified = "󰏬 ", removed = " " },
   diff_color = {
     added = { fg = colors.green },
     modified = { fg = colors.orange },
     removed = { fg = colors.red },
   },
+  color = { bg = colors.dark },
+  separator = { left = "", right = "" },
   cond = conditions.hide_in_width,
 }
 
 ins_left {
-  function() return '%=' end,
+  function()
+    return "%="
+  end,
 }
 
 -- === 右侧组件 ===
+ins_right {
+  "searchcount",
+  color = { fg = colors.yellow, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
+}
 
 ins_right {
-  'diagnostics',
-  sources = { 'nvim_diagnostic' },
-  symbols = { error = ' ', warn = ' ', info = ' ' },
+  "diagnostics",
+  sources = { "nvim_diagnostic" },
+  symbols = { error = " ", warn = " ", info = " " },
   diagnostics_color = {
     error = { fg = colors.red },
     warn = { fg = colors.yellow },
     info = { fg = colors.cyan },
   },
-}
-
-ins_right {
-  function() return require('lsp-progress').progress() end,
-  color = { fg = colors.cyan, gui = 'bold' },
+  color = { bg = colors.dark },
+  separator = { left = "", right = "" },
 }
 
 ins_right {
   function()
-    local buf_ft = vim.api.nvim_get_option_value('filetype', { scope = 'local' })
+    return require("lsp-progress").progress()
+  end,
+  color = { fg = colors.cyan, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
+}
+
+ins_right {
+  function()
+    local buf_ft =
+      vim.api.nvim_get_option_value("filetype", { scope = "local" })
     local clients = vim.lsp.get_clients()
-    if next(clients) == nil then return 'No LSP' end
+    if next(clients) == nil then
+      return "No LSP"
+    end
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
         return client.name
       end
     end
-    return 'No LSP'
+    return "No LSP"
   end,
-  icon = '󰄭',
-  color = { fg = colors.blue, gui = 'bold' },
+  icon = "󰄭",
+  color = { fg = colors.blue, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
 }
 
-ins_right { 'location' }
-
-ins_right { 'progress', color = { fg = colors.fg, gui = 'bold' } }
-
--- 7. 右侧时间胶囊
--- 7.1 左半圆
 ins_right {
-  function() return '' end,
-  color = { fg = colors.blue, bg = colors.bg }, -- 这里用蓝色背景
+  "encoding",
+  fmt = string.upper,
+  color = { fg = colors.green, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
+}
+
+ins_right {
+  "location",
+  color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
+}
+
+ins_right {
+  "progress",
+  color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
+  separator = { left = "", right = "" },
+}
+
+ins_right {
+  function()
+    return ""
+  end,
+  color = { fg = colors.blue, bg = colors.bg },
   padding = { left = 1, right = 0 },
 }
 
--- 7.2 时间主体
 ins_right {
-  function() return os.date("%H:%M") end,
+  function()
+    return os.date "%H:%M "
+  end,
   icon = "",
-  color = { fg = colors.dark, bg = colors.blue, gui = "bold" }, -- 深色字，蓝色底
-}
-
--- 7.3 右半圆
-ins_right {
-  function() return '' end,
-  color = { fg = colors.blue, bg = colors.bg },
-  padding = { left = 0, right = 0 },
+  color = { fg = colors.dark, bg = colors.blue, gui = "bold" },
 }
 
 lualine.setup(config)

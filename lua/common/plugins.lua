@@ -66,8 +66,17 @@ require("lazy").setup {
     end,
   },
   "kyazdani42/nvim-tree.lua",
+  -- {
+  --   "akinsho/bufferline.nvim",
+  -- },
+  { "nanozuki/tabby.nvim", dependencies = "echasnovski/mini.icons" },
   {
-    "akinsho/bufferline.nvim",
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
+    ft = { "markdown" },
+    config = function()
+      require("render-markdown").setup {}
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
