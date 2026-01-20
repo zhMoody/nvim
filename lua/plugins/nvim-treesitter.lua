@@ -1,3 +1,4 @@
+require("nvim-treesitter.install").prefer_get = true
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "vim",
