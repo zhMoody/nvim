@@ -11,12 +11,15 @@ local opts = {
     "css",
     "typescriptreact",
     "javascriptreact",
+    "javascript", -- 支持 .js 文件
     "rescript",
   },
   init_options = {
     includeLanguages = {
+      javascript = "javascriptreact", -- 强制 .js 当作 jsx 处理
       rescript = "html",
     },
+    showSuggestionsAsSnippets = true,
   },
 }
 

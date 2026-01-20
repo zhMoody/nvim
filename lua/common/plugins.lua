@@ -91,6 +91,12 @@ require("lazy").setup {
   },
   "numToStr/Comment.nvim",
   "windwp/nvim-autopairs",
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
   "tpope/vim-surround",
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   "lewis6991/gitsigns.nvim",

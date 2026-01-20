@@ -44,11 +44,23 @@ local opts = {
     typescript = {
       preferences = {
         autoClosingTags = true,
+        importModuleSpecifierPreference = "non-relative",
+        includeCompletionsForModuleExports = true,
+        quotePreference = "double",
+      },
+      suggest = {
+        includeCompletionsForImportStatements = true,
       },
     },
     javascript = {
       preferences = {
         autoClosingTags = true,
+        importModuleSpecifierPreference = "non-relative",
+        includeCompletionsForModuleExports = true,
+        quotePreference = "double",
+      },
+      suggest = {
+        includeCompletionsForImportStatements = true,
       },
     },
   },
