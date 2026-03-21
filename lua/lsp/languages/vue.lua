@@ -30,10 +30,6 @@ local opts = {
     plugins = plugins,
   },
   filetypes = {
-    "typescript",
-    "javascript",
-    "javascriptreact",
-    "typescriptreact",
     "vue",
   },
   on_attach = function(client, buf)
