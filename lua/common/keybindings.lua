@@ -194,50 +194,122 @@ vim.api.nvim_create_autocmd("WinLeave", {
   end,
 })
 
--- 底部终端：每次按键新开一个（平行排列），count 自增区分 ID
--- stack=true 让 Snacks 自动把同方向的终端叠加在一起
-local tt_count = 10  -- 底部终端从 10 开始，与右侧终端（20+）隔开
+-- 底部终端分屏管理
+local tt_windows = {}  -- 存储底部分屏的所有窗口
 
 vim.keymap.set({ "n", "t" }, "<leader>tt", function()
-  -- 找到主编辑窗口（非终端），让 tt 只在它下方分割，不覆盖 tr
-  local target_win = nil
-  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-    if vim.bo[vim.api.nvim_win_get_buf(win)].buftype ~= "terminal" then
-      target_win = win
+  -- 检查是否有底部分屏窗口存在
+  local has_valid_window = false
+  for _, win in ipairs(tt_windows) do
+    if vim.api.nvim_win_is_valid(win) then
+      has_valid_window = true
       break
     end
   end
-  tt_count = tt_count + 1
-  Snacks.terminal.open(nil, {
-    count = tt_count,
-    win = {
-      position = "bottom",
-      relative = target_win and "win" or "editor",
-      win = target_win,
-      stack = true,
-    },
-  })
-end, { desc = "新建底部终端" })
 
--- 右侧终端：每次按键新开一个（上下排列），占满高度
-local tr_count = 20  -- 右侧终端从 20 开始
+  if has_valid_window then
+    -- 关闭所有底部分屏窗口及其 buffer
+    for _, win in ipairs(tt_windows) do
+      if vim.api.nvim_win_is_valid(win) then
+        local buf = vim.api.nvim_win_get_buf(win)
+        vim.api.nvim_win_close(win, false)
+        if vim.api.nvim_buf_is_valid(buf) then
+          vim.api.nvim_buf_delete(buf, { force = true })
+        end
+      end
+    end
+    tt_windows = {}
+  else
+    -- 创建新的底部分屏
+    vim.cmd("botright split")
+    vim.cmd("resize 15")
+    vim.cmd("terminal")
+    vim.bo.buflisted = false  -- 不在标签栏显示
+    vim.cmd("startinsert")
+    table.insert(tt_windows, vim.api.nvim_get_current_win())
+  end
+end, { desc = "切换底部终端分屏" })
+
+-- 右侧终端分屏管理
+local tr_windows = {}  -- 存储右侧分屏的所有窗口
 
 vim.keymap.set({ "n", "t" }, "<leader>tr", function()
-  tr_count = tr_count + 1
-  Snacks.terminal.open(nil, {
-    count = tr_count,
-    win = {
-      position = "right",
-      stack = true,
-      -- 右侧终端占满编辑器高度
-      wo = { winfixheight = false },
-      on_win = function(self)
-        -- 强制撑满高度
-        vim.api.nvim_win_set_height(self.win, vim.o.lines)
-      end,
-    },
-  })
-end, { desc = "新建右侧终端" })
+  -- 检查是否有右侧分屏窗口存在
+  local has_valid_window = false
+  for _, win in ipairs(tr_windows) do
+    if vim.api.nvim_win_is_valid(win) then
+      has_valid_window = true
+      break
+    end
+  end
+
+  if has_valid_window then
+    -- 关闭所有右侧分屏窗口及其 buffer
+    for _, win in ipairs(tr_windows) do
+      if vim.api.nvim_win_is_valid(win) then
+        local buf = vim.api.nvim_win_get_buf(win)
+        vim.api.nvim_win_close(win, false)
+        if vim.api.nvim_buf_is_valid(buf) then
+          vim.api.nvim_buf_delete(buf, { force = true })
+        end
+      end
+    end
+    tr_windows = {}
+  else
+    -- 创建新的右侧分屏
+    vim.cmd("botright vsplit")
+    vim.cmd("terminal")
+    vim.bo.buflisted = false  -- 不在标签栏显示
+    vim.cmd("startinsert")
+    table.insert(tr_windows, vim.api.nvim_get_current_win())
+  end
+end, { desc = "切换右侧终端分屏" })
+
+-- 辅助函数：判断当前窗口属于哪个分屏组
+local function get_split_group()
+  local current_win = vim.api.nvim_get_current_win()
+
+  -- 检查是否在 tt 分屏组
+  for _, win in ipairs(tt_windows) do
+    if win == current_win then
+      return "tt", tt_windows
+    end
+  end
+
+  -- 检查是否在 tr 分屏组
+  for _, win in ipairs(tr_windows) do
+    if win == current_win then
+      return "tr", tr_windows
+    end
+  end
+
+  return nil, nil
+end
+
+-- 导出函数供 which-key 使用
+_G.split_in_terminal_group = function(direction)
+  local group, windows = get_split_group()
+
+  if group then
+    -- 在终端分屏组内分割
+    if direction == "h" then
+      vim.cmd("vsplit")
+    else
+      vim.cmd("split")
+    end
+    vim.cmd("terminal")
+    vim.bo.buflisted = false  -- 不在标签栏显示
+    vim.cmd("startinsert")
+    table.insert(windows, vim.api.nvim_get_current_win())
+  else
+    -- 普通窗口，正常分割
+    if direction == "h" then
+      vim.cmd("vsp")
+    else
+      vim.cmd("sp")
+    end
+  end
+end
 
 -- 打开 Lazygit
 vim.keymap.set("n", "<leader>gg", function()

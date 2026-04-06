@@ -86,9 +86,21 @@ wk.add {
   { "<leader>w", group = "窗口" },
   { "<leader>w=", "<C-w>=", desc = "平均分割窗口" },
   { "<leader>wc", "<C-w>c", desc = "关闭当前窗口" },
-  { "<leader>wh", ":vsp<CR>", desc = "水平分割窗口" },
+  {
+    "<leader>wh",
+    function()
+      _G.split_in_terminal_group("h")
+    end,
+    desc = "水平分割窗口",
+  },
   { "<leader>wo", "<C-w>o", desc = "关闭其他窗口" },
-  { "<leader>wv", ":sp<CR>", desc = "垂直分割窗口" },
+  {
+    "<leader>wv",
+    function()
+      _G.split_in_terminal_group("v")
+    end,
+    desc = "垂直分割窗口",
+  },
 }
 
 wk.add {
