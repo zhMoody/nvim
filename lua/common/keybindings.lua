@@ -25,6 +25,12 @@ map("n", "<A-[>", "<C-w>-", opt)
 map("n", "<A-h>", "<C-w><", opt)
 map("n", "<A-l>", "<C-w>>", opt)
 
+-- 终端模式下也能调整窗口大小
+map("t", "<A-]>", "<C-\\><C-n><C-w>+i", opt)
+map("t", "<A-[>", "<C-\\><C-n><C-w>-i", opt)
+map("t", "<A-h>", "<C-\\><C-n><C-w><i", opt)
+map("t", "<A-l>", "<C-\\><C-n><C-w>>i", opt)
+
 map("n", "<C-u>", "9k", opt)
 map("n", "<C-d>", "9j", opt)
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", opt)
@@ -179,12 +185,24 @@ end
 
 -- === Snacks Keybindings ===
 -- 切换底部终端
-vim.keymap.set({ "n", "t" }, "<leader>tt", function()
+vim.keymap.set("n", "<leader>tt", function()
+  Snacks.terminal.toggle(nil, { win = { position = "bottom" } })
+end, { desc = "切换终端" })
+
+-- 终端模式下切换底部终端
+vim.keymap.set("t", "<leader>tt", function()
+  vim.cmd("stopinsert")
   Snacks.terminal.toggle(nil, { win = { position = "bottom" } })
 end, { desc = "切换终端" })
 
 -- 在右边打开终端
 vim.keymap.set("n", "<leader>tr", function()
+  Snacks.terminal.open(nil, { win = { position = "right" } })
+end, { desc = "右侧终端" })
+
+-- 终端模式下在右边打开终端
+vim.keymap.set("t", "<leader>tr", function()
+  vim.cmd("stopinsert")
   Snacks.terminal.open(nil, { win = { position = "right" } })
 end, { desc = "右侧终端" })
 
