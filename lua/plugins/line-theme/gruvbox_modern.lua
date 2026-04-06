@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 -- Gruvbox Material Colors
 local colors = {
   bg = "NONE",
+  bg_cmd = "#282828",  -- 用于 nvim_command 字符串拼接，NONE 不能直接拼
   fg = "#a89984",
   yellow = "#d8a657",
   cyan = "#89b482",
@@ -114,12 +115,15 @@ ins_left {
         .. " gui=bold"
     )
 
-    local f_icons = {
-      unix = "",
-      dos = "",
-      mac = "",
-    }
-    return " " .. (f_icons[vim.bo.fileformat] or "")
+    local os_icon
+    if vim.fn.has("mac") == 1 then
+      os_icon = ""
+    elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+      os_icon = ""
+    else
+      os_icon = ""
+    end
+    return " " .. os_icon
   end,
   color = "LualineModeMain",
   padding = { right = 1 },
@@ -154,7 +158,7 @@ ins_left {
       "hi! LualineModeTail guifg="
         .. (mode_color[vim.fn.mode()] or colors.red)
         .. " guibg="
-        .. colors.bg
+        .. colors.bg_cmd
     )
     return ""
   end,
