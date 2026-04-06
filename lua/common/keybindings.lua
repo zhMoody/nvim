@@ -184,27 +184,60 @@ M.map_rust_dap = function()
 end
 
 -- === Snacks Keybindings ===
--- 切换底部终端
-vim.keymap.set("n", "<leader>tt", function()
-  Snacks.terminal.toggle(nil, { win = { position = "bottom" } })
-end, { desc = "切换终端" })
 
--- 终端模式下切换底部终端
-vim.keymap.set("t", "<leader>tt", function()
-  vim.cmd("stopinsert")
-  Snacks.terminal.toggle(nil, { win = { position = "bottom" } })
-end, { desc = "切换终端" })
+-- 离开终端窗口自动退出 insert 模式，这样切换到其他窗口后快捷键立即可用
+vim.api.nvim_create_autocmd("WinLeave", {
+  callback = function()
+    if vim.bo.buftype == "terminal" then
+      vim.cmd("stopinsert")
+    end
+  end,
+})
 
--- 在右边打开终端
-vim.keymap.set("n", "<leader>tr", function()
-  Snacks.terminal.open(nil, { win = { position = "right" } })
-end, { desc = "右侧终端" })
+-- 底部终端：每次按键新开一个（平行排列），count 自增区分 ID
+-- stack=true 让 Snacks 自动把同方向的终端叠加在一起
+local tt_count = 10  -- 底部终端从 10 开始，与右侧终端（20+）隔开
 
--- 终端模式下在右边打开终端
-vim.keymap.set("t", "<leader>tr", function()
-  vim.cmd("stopinsert")
-  Snacks.terminal.open(nil, { win = { position = "right" } })
-end, { desc = "右侧终端" })
+vim.keymap.set({ "n", "t" }, "<leader>tt", function()
+  -- 找到主编辑窗口（非终端），让 tt 只在它下方分割，不覆盖 tr
+  local target_win = nil
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if vim.bo[vim.api.nvim_win_get_buf(win)].buftype ~= "terminal" then
+      target_win = win
+      break
+    end
+  end
+  tt_count = tt_count + 1
+  Snacks.terminal.open(nil, {
+    count = tt_count,
+    win = {
+      position = "bottom",
+      relative = target_win and "win" or "editor",
+      win = target_win,
+      stack = true,
+    },
+  })
+end, { desc = "新建底部终端" })
+
+-- 右侧终端：每次按键新开一个（上下排列），占满高度
+local tr_count = 20  -- 右侧终端从 20 开始
+
+vim.keymap.set({ "n", "t" }, "<leader>tr", function()
+  tr_count = tr_count + 1
+  Snacks.terminal.open(nil, {
+    count = tr_count,
+    win = {
+      position = "right",
+      stack = true,
+      -- 右侧终端占满编辑器高度
+      wo = { winfixheight = false },
+      on_win = function(self)
+        -- 强制撑满高度
+        vim.api.nvim_win_set_height(self.win, vim.o.lines)
+      end,
+    },
+  })
+end, { desc = "新建右侧终端" })
 
 -- 打开 Lazygit
 vim.keymap.set("n", "<leader>gg", function()
