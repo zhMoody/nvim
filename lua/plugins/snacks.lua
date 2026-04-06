@@ -4,7 +4,12 @@ if ok then
   snacks.setup {
     input = { enabled = true },
     image = { enabled = true },
-    terminal = { enabled = true },
+    terminal = {
+      enabled = true,
+      win = {
+        position = "bottom",
+      },
+    },
     bigfile = { enabled = true },
     statuscolumn = {
       enabled = true,

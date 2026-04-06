@@ -37,6 +37,12 @@ map("n", "<C-l>", "<C-w>l", opt)
 map("n", "<C-j>", "<C-w>j", opt)
 map("n", "<C-h>", "<C-w>h", opt)
 
+-- 终端模式下也能切换窗口
+map("t", "<C-k>", "<C-\\><C-n><C-w>k", opt)
+map("t", "<C-l>", "<C-\\><C-n><C-w>l", opt)
+map("t", "<C-j>", "<C-\\><C-n><C-w>j", opt)
+map("t", "<C-h>", "<C-\\><C-n><C-w>h", opt)
+
 vim.keymap.set("n", "<localleader>c", function()
   if vim.o.background == "light" then
     vim.o.background = "dark"
@@ -172,15 +178,23 @@ M.map_rust_dap = function()
 end
 
 -- === Snacks Keybindings ===
--- 切换悬浮终端
+-- 切换底部终端
 vim.keymap.set({ "n", "t" }, "<leader>tt", function()
-  require("snacks").terminal.toggle()
-end, { desc = "Toggle Terminal" })
+  Snacks.terminal.toggle(nil, { win = { position = "bottom" } })
+end, { desc = "切换终端" })
+
+-- 在右边打开终端
+vim.keymap.set("n", "<leader>tr", function()
+  Snacks.terminal.open(nil, { win = { position = "right" } })
+end, { desc = "右侧终端" })
 
 -- 打开 Lazygit
 vim.keymap.set("n", "<leader>gg", function()
   require("snacks").lazygit()
 end, { desc = "Lazygit" })
+
+-- 终端模式下单次 ESC 退出到 normal 模式
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- === Markdown Keybindings ===
 vim.keymap.set("n", "<leader>mt", "<cmd>RenderMarkdown toggle<CR>", { desc = "Markdown Toggle" })
