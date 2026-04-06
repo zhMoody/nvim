@@ -1,3 +1,11 @@
+-- 透明 tabline 背景，营造悬空感
+vim.api.nvim_set_hl(0, "TabLineFill", { bg = "NONE" })
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "TabLineFill", { bg = "NONE" })
+  end,
+})
+
 local theme = {
   fill = "TabLineFill",
   -- 左侧 Logo 颜色：紫色
@@ -16,6 +24,19 @@ local function get_icon(filename)
   local extension = vim.fn.fnamemodify(filename, ":e")
   local icon, _ = require("mini.icons").get("file", filename)
   return icon or "󰈚"
+end
+
+-- 获取图标对应的彩色 hl group（背景与 tab 一致）
+local function get_icon_hl(filename, tab_bg)
+  if not filename or filename == "" then return nil end
+  local _, hl_name = require("mini.icons").get("file", filename)
+  if not hl_name then return nil end
+  local ok, hi = pcall(vim.api.nvim_get_hl, 0, { name = hl_name, link = false })
+  if not ok or not hi.fg then return nil end
+  local fg = string.format("#%06x", hi.fg)
+  local key = "TabbyIcon_" .. hl_name:gsub("[^%w]", "_") .. "_" .. tab_bg:sub(2)
+  vim.api.nvim_set_hl(0, key, { fg = fg, bg = tab_bg })
+  return key
 end
 
 local function get_diagnostics(bufid)
@@ -58,7 +79,9 @@ require("tabby").setup {
       line.bufs().foreach(function(buf)
         local is_active = buf.is_current()
         local hl = is_active and theme.current_tab or theme.tab
+        local tab_bg = is_active and "#d75f5f" or "#3c3836"
         local icon = get_icon(buf.name())
+        local icon_hl = get_icon_hl(buf.name(), tab_bg) or hl
         local name = buf.name() == "" and "[No Name]"
           or vim.fn.fnamemodify(buf.name(), ":t")
 
@@ -67,8 +90,8 @@ require("tabby").setup {
 
         return {
           line.sep("", hl, theme.fill),
-          icon,
-          "",
+          { icon, hl = icon_hl },
+          " ",
           name,
           diag,
           changed,

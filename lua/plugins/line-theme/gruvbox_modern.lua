@@ -1,8 +1,18 @@
 local lualine = require "lualine"
 
+-- 透明状态栏背景，营造悬空感
+vim.api.nvim_set_hl(0, "StatusLine",   { bg = "NONE" })
+vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "StatusLine",   { bg = "NONE" })
+    vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+  end,
+})
+
 -- Gruvbox Material Colors
 local colors = {
-  bg = "#282828",
+  bg = "NONE",
   fg = "#a89984",
   yellow = "#d8a657",
   cyan = "#89b482",
@@ -154,10 +164,32 @@ ins_left {
 
 -- 4. 文件名
 ins_left {
+  function()
+    local filename = vim.fn.expand "%:t"
+    if filename == "" then
+      vim.api.nvim_set_hl(0, "LualineFileIconGM", { fg = colors.fg, bg = colors.dark })
+      return ""
+    end
+    local icon, hl_name = require("mini.icons").get("file", filename)
+    local fg = colors.blue
+    if hl_name then
+      local ok, hi = pcall(vim.api.nvim_get_hl, 0, { name = hl_name, link = false })
+      if ok and hi.fg then fg = string.format("#%06x", hi.fg) end
+    end
+    vim.api.nvim_set_hl(0, "LualineFileIconGM", { fg = fg, bg = colors.dark })
+    return (icon or "") .. " "
+  end,
+  color = "LualineFileIconGM",
+  cond = conditions.buffer_not_empty,
+  padding = { left = 1, right = 0 },
+  separator = { left = "", right = "" },
+}
+
+ins_left {
   "filename",
   cond = conditions.buffer_not_empty,
   color = { fg = colors.magenta, bg = colors.dark, gui = "bold" },
-  separator = { left = "", right = "" },
+  separator = { left = "", right = "" },
   path = 1,
 }
 
