@@ -56,11 +56,15 @@ local function tt_toggle()
     -- 隐藏：关闭窗口，保留 buf/进程
     for _, e in ipairs(tt_splits) do
       if vim.api.nvim_win_is_valid(e.win) then
-        vim.api.nvim_win_close(e.win, false)
+        if #vim.api.nvim_list_wins() > 1 then
+          vim.api.nvim_win_close(e.win, false)
+        end
         e.win = -1
       end
     end
-    vim.api.nvim_win_close(tt_main.win, false)
+    if #vim.api.nvim_list_wins() > 1 then
+      vim.api.nvim_win_close(tt_main.win, false)
+    end
     tt_main.win = -1
   else
     -- 从主编辑窗口向下 split，天然与 tr 并排不覆盖
@@ -107,7 +111,7 @@ end
 
 local function tt_remove_buf(buf)
   if tt_main and tt_main.buf == buf then
-    if vim.api.nvim_win_is_valid(tt_main.win) then
+    if vim.api.nvim_win_is_valid(tt_main.win) and #vim.api.nvim_list_wins() > 1 then
       vim.api.nvim_win_close(tt_main.win, false)
     end
     if vim.api.nvim_buf_is_valid(buf) then
@@ -119,7 +123,7 @@ local function tt_remove_buf(buf)
   local new_splits = {}
   for _, e in ipairs(tt_splits) do
     if e.buf == buf then
-      if vim.api.nvim_win_is_valid(e.win) then vim.api.nvim_win_close(e.win, false) end
+      if vim.api.nvim_win_is_valid(e.win) and #vim.api.nvim_list_wins() > 1 then vim.api.nvim_win_close(e.win, false) end
       if vim.api.nvim_buf_is_valid(buf) then vim.api.nvim_buf_delete(buf, { force = true }) end
     else
       table.insert(new_splits, e)
@@ -188,7 +192,7 @@ local function tr_remove_buf(buf)
   local new_splits = {}
   for _, e in ipairs(tr_splits) do
     if e.buf == buf then
-      if vim.api.nvim_win_is_valid(e.win) then vim.api.nvim_win_close(e.win, false) end
+      if vim.api.nvim_win_is_valid(e.win) and #vim.api.nvim_list_wins() > 1 then vim.api.nvim_win_close(e.win, false) end
       if vim.api.nvim_buf_is_valid(buf) then vim.api.nvim_buf_delete(buf, { force = true }) end
     else
       table.insert(new_splits, e)
