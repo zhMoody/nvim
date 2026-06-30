@@ -1,0 +1,61 @@
+-- vim 基础选项（立即生效，不依赖 lazy 加载）
+vim.g.encoding = "UTF-8"
+vim.o.fileencoding = "utf-8"
+vim.o.scrolloff = 8
+vim.o.sidescrolloff = 8
+vim.wo.number = true
+vim.wo.relativenumber = true
+vim.wo.cursorline = true
+vim.wo.signcolumn = "yes"
+vim.wo.colorcolumn = "0"
+vim.o.tabstop = 2
+vim.bo.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.shiftround = true
+vim.o.shiftwidth = 2
+vim.bo.shiftwidth = 2
+vim.o.expandtab = true
+vim.bo.expandtab = true
+vim.o.autoindent = true
+vim.bo.autoindent = true
+vim.o.smartindent = true
+vim.o.ignorecase = false
+vim.o.hlsearch = true
+vim.o.incsearch = true
+vim.o.showmode = false
+vim.o.cmdheight = 0
+vim.o.autoread = true
+vim.bo.autoread = true
+vim.o.wrap = false
+vim.wo.wrap = false
+vim.o.whichwrap = "b,s,<,>,[,]"
+vim.o.hidden = true
+vim.o.mouse = ""
+vim.o.updatetime = 300
+vim.o.timeoutlen = 500
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.opt.completeopt = "menu,menuone,noselect"
+vim.o.termguicolors = true
+vim.o.list = true
+vim.o.listchars = "space: "
+vim.o.wildmenu = true
+vim.o.shortmess = vim.o.shortmess .. "c"
+vim.o.pumheight = 10
+vim.o.showtabline = 2
+
+local prefix = vim.fn.expand("/tmp")
+vim.opt.undodir = { prefix .. "/nvim/.undo//" }
+vim.opt.backupdir = { prefix .. "/nvim/.backup//" }
+vim.opt.directory = { prefix .. "/nvim/.swp//" }
+
+vim.o.clipboard = "unnamed,unnamedplus"
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+
+-- 禁用 netrw（由 nvim-tree 替代）
+vim.g.loaded_netrw = 0
+vim.g.loaded_netrwPlugin = 0
+
+-- 返回一个空 spec（仅用于占位）
+return {}
