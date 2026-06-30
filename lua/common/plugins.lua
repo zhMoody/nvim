@@ -57,7 +57,7 @@ require("lazy").setup {
   "williamboman/mason-lspconfig.nvim",
   "WhoIsSethDaniel/mason-tool-installer.nvim",
   "neovim/nvim-lspconfig",
-  "limitLiu/nvim-treesitter-rescript",
+  -- "limitLiu/nvim-treesitter-rescript", -- incompatible with 0.12
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
