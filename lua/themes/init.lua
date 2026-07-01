@@ -5,97 +5,97 @@ M.registry = {
   -- ── 暗色 ──────────────────────────────────────
   gruvbox = {
     colorscheme = "gruvbox", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
     setup = function() require("themes.gruvbox") end,
   },
   everforest = {
     colorscheme = "everforest", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   catppuccin = {
     colorscheme = "catppuccin", background = "dark", type = "dark",
-    statusline = "evil", tabline = "gruvbox_modern",
+    statusline = "evil", tabline = "segmented",
     setup = function() require("catppuccin").setup({ flavour = "macchiato" }) end,
   },
   zephyr = {
     colorscheme = "zephyr", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   tokyonight = {
     colorscheme = "tokyonight", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
     setup = function() require("tokyonight").setup({ style = "night" }) end,
   },
   rosepine = {
     colorscheme = "rose-pine", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   kanagawa = {
     colorscheme = "kanagawa", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
     setup = function() require("kanagawa").setup({ theme = "wave" }) end,
   },
   nightfox = {
     colorscheme = "nightfox", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   dracula = {
     colorscheme = "dracula", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   nord = {
     colorscheme = "nord", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   sonokai = {
     colorscheme = "sonokai", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   onedark = {
     colorscheme = "onedark", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   ["github-dark"] = {
     colorscheme = "github_dark", background = "dark", type = "dark",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
 
   -- ── 亮色 ──────────────────────────────────────
   ["everforest-light"] = {
     colorscheme = "everforest", background = "light", type = "light",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   latte = {
     colorscheme = "catppuccin", background = "light", type = "light",
-    statusline = "evil", tabline = "gruvbox_modern",
+    statusline = "evil", tabline = "segmented",
     setup = function() require("catppuccin").setup({ flavour = "latte" }) end,
   },
   ["tokyonight-day"] = {
     colorscheme = "tokyonight", background = "light", type = "light",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
     setup = function() require("tokyonight").setup({ style = "day" }) end,
   },
   ["rosepine-dawn"] = {
     colorscheme = "rose-pine", background = "light", type = "light",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
     setup = function() require("rose-pine").setup({ variant = "dawn" }) end,
   },
   ["kanagawa-lotus"] = {
     colorscheme = "kanagawa", background = "light", type = "light",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
     setup = function() require("kanagawa").setup({ theme = "lotus" }) end,
   },
   dayfox = {
     colorscheme = "dayfox", background = "light", type = "light",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   dawnfox = {
     colorscheme = "dawnfox", background = "light", type = "light",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
   ["github-light"] = {
     colorscheme = "github_light", background = "light", type = "light",
-    statusline = "gruvbox_modern", tabline = "gruvbox_modern",
+    statusline = "segmented", tabline = "segmented",
   },
 }
 
@@ -192,12 +192,12 @@ end)
 
 function M.get_statusline_theme()
   local theme = M.registry[M.current]
-  return theme and theme.statusline or "gruvbox_modern"
+  return theme and theme.statusline or "segmented"
 end
 
 function M.get_tabline_theme()
   local theme = M.registry[M.current]
-  return theme and theme.tabline or "gruvbox_modern"
+  return theme and theme.tabline or "segmented"
 end
 
 return M

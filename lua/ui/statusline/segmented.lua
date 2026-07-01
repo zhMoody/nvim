@@ -297,6 +297,25 @@ ins_right {
 }
 
 ins_right {
+  "fileformat",
+  fmt = function(v)
+    return v == "dos" and "CRLF" or "LF"
+  end,
+  color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
+  padding = { left = 1, right = 1 },
+}
+
+ins_right {
+  "selectioncount",
+  fmt = function(v)
+    if v == "" or v == nil then return "" end
+    return v
+  end,
+  color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
+  padding = { left = 1, right = 1 },
+}
+
+ins_right {
   "location",
   color = { fg = colors.fg, bg = colors.dark, gui = "bold" },
   separator = { left = "", right = "" },
